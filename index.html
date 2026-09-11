@@ -1,1584 +1,925 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Hassaan Shahid — Aerospace Engineer &amp; Researcher</title>
-<meta name="description" content="Hassaan Shahid — Aerospace Engineer and researcher. Flight control systems, UAV systems engineering, SIL/HIL iron-bird testing, and verified physics-informed surrogate models. MSc Aeronautical Engineering, Linköping University." />
-<meta name="author" content="Hassaan Shahid" />
-<meta property="og:title" content="Hassaan Shahid — Aerospace Engineer &amp; Researcher" />
-<meta property="og:description" content="UAV systems, flight control, and verified physics-informed surrogates. Published research, three national competition wins, MSc at Linköping University." />
-<meta property="og:type" content="profile" />
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hassaan Shahid | Aeronautical Engineer, Scientific Machine Learning and CFD</title>
+<meta name="description" content="M.Sc. Aeronautical Engineering at Linkoping University. Scientific machine learning, CFD, aircraft conceptual design and UAV flight systems. Available for a 30 hp master thesis, January to June 2027.">
+<meta name="author" content="Hassaan Shahid">
+<meta property="og:title" content="Hassaan Shahid | Aeronautical Engineer">
+<meta property="og:description" content="Sole-authored preprint in physics-informed machine learning. CFD, aircraft design and UAV flight systems. Available for a 30 hp master thesis, January to June 2027.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://hassaanshahid97-cyber.github.io">
+<meta property="og:image" content="https://hassaanshahid97-cyber.github.io/images/profile.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✈️</text></svg>">
 <style>
-/* ══════════════════════════════════════════════════════════
-   TOKENS
-   ══════════════════════════════════════════════════════════ */
+/* ============================ tokens ============================ */
 :root{
-  --bg:#080b11;
-  --bg-2:#0c111a;
-  --panel:#101823;
-  --panel-2:#141d2b;
-  --panel-3:#182231;
-  --line:#1e2a3b;
-  --line-2:#27364b;
-  --text:#e8eef7;
-  --muted:#8ea0b8;
-  --faint:#5c6d85;
-  --accent:#3dd6d0;
-  --accent-2:#4f8cff;
-  --accent-3:#a77dff;
-  --warn:#ffb454;
-  --danger:#ff6b5e;
-  --ok:#4ade80;
-  --glow:rgba(61,214,208,.14);
-  --radius:14px;
-  --radius-lg:20px;
-  --max:1180px;
-  --ease:cubic-bezier(.16,1,.3,1);
+  --bg:#f7f8fa; --bg-2:#ffffff; --bg-3:#eef1f5;
+  --ink:#0f1720; --ink-2:#42505f; --ink-3:#6b7a8c;
+  --line:#dde3ea; --line-2:#c8d2dd;
+  --accent:#0b5fa5; --accent-2:#0a7a6b; --accent-ink:#ffffff;
+  --warn:#a8560c; --good:#166534;
+  --shadow:0 1px 2px rgba(16,24,40,.05),0 8px 24px -12px rgba(16,24,40,.18);
+  --shadow-lg:0 24px 60px -20px rgba(16,24,40,.28);
+  --radius:14px; --radius-sm:9px;
+  --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,"Helvetica Neue",Arial,sans-serif;
+  --maxw:1180px;
 }
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;scroll-padding-top:80px}
-body{
-  background:var(--bg);color:var(--text);
-  font-family:'Inter',system-ui,-apple-system,sans-serif;
-  line-height:1.65;overflow-x:hidden;-webkit-font-smoothing:antialiased;
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0c1117; --bg-2:#131a23; --bg-3:#1a232e;
+    --ink:#e8eef5; --ink-2:#a9b8c7; --ink-3:#7d8fa3;
+    --line:#22303d; --line-2:#31414f;
+    --accent:#5ba8f0; --accent-2:#3fbfa8; --accent-ink:#06121d;
+    --warn:#e0a35c; --good:#7bd39a;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -12px rgba(0,0,0,.6);
+    --shadow-lg:0 24px 60px -20px rgba(0,0,0,.7);
+  }
 }
-body.noscroll{overflow:hidden}
-a{color:inherit;text-decoration:none}
-button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
-h1,h2,h3,h4{font-family:'Space Grotesk',sans-serif;line-height:1.14;letter-spacing:-.015em}
-.mono{font-family:'JetBrains Mono',ui-monospace,monospace}
-.wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
-::selection{background:var(--glow);color:#fff}
-:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+:root[data-theme="dark"]{
+  --bg:#0c1117; --bg-2:#131a23; --bg-3:#1a232e;
+  --ink:#e8eef5; --ink-2:#a9b8c7; --ink-3:#7d8fa3;
+  --line:#22303d; --line-2:#31414f;
+  --accent:#5ba8f0; --accent-2:#3fbfa8; --accent-ink:#06121d;
+  --warn:#e0a35c; --good:#7bd39a;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -12px rgba(0,0,0,.6);
+  --shadow-lg:0 24px 60px -20px rgba(0,0,0,.7);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:78px;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto} *{animation:none!important;transition:none!important}}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16.5px;line-height:1.62;
+     -webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{max-width:100%;height:auto;display:block}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+:focus-visible{outline:2.5px solid var(--accent);outline-offset:3px;border-radius:4px}
+.wrap{max-width:var(--maxw);margin:0 auto;padding-inline:22px}
+.mono{font-family:var(--mono);font-size:.84em;letter-spacing:-.01em}
+h1,h2,h3,h4{line-height:1.2;margin:0;letter-spacing:-.02em;font-weight:660}
+section{padding-block:clamp(56px,7vw,92px);border-top:1px solid var(--line)}
+section:first-of-type{border-top:0}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);
+         font-weight:600;margin-bottom:12px}
+.sec-title{font-size:clamp(26px,3.6vw,38px);margin-bottom:12px}
+.sec-lede{color:var(--ink-2);max-width:70ch;margin-bottom:34px;font-size:1.02em}
 
-/* backdrop */
-#flow{position:fixed;inset:0;z-index:-3;opacity:.55;pointer-events:none}
-body::before{
-  content:"";position:fixed;inset:0;z-index:-4;
-  background:
-    radial-gradient(1000px 700px at 82% -8%, rgba(79,140,255,.11), transparent 62%),
-    radial-gradient(900px 700px at -5% 12%, rgba(61,214,208,.09), transparent 58%),
-    radial-gradient(700px 600px at 50% 105%, rgba(167,125,255,.06), transparent 60%),
-    var(--bg);
-}
-body::after{
-  content:"";position:fixed;inset:0;z-index:-2;opacity:.42;pointer-events:none;
-  background-image:
-    linear-gradient(to right, rgba(255,255,255,.022) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255,255,255,.022) 1px, transparent 1px);
-  background-size:52px 52px;
-  mask-image:radial-gradient(ellipse 110% 70% at 50% 0%, #000 25%, transparent 88%);
-}
-
-/* ══════════════════════════════════════════════════════════
-   SCROLL PROGRESS + NAV
-   ══════════════════════════════════════════════════════════ */
-#progress{position:fixed;top:0;left:0;height:2px;width:0;z-index:80;
-  background:linear-gradient(90deg,var(--accent),var(--accent-2),var(--accent-3));
-  box-shadow:0 0 12px var(--glow);transition:width .08s linear}
-header.nav{position:sticky;top:0;z-index:60;backdrop-filter:blur(14px);
-  background:rgba(8,11,17,.68);border-bottom:1px solid transparent;transition:.3s var(--ease)}
-header.nav.scrolled{border-bottom-color:var(--line);background:rgba(8,11,17,.92)}
-.nav-inner{display:flex;align-items:center;justify-content:space-between;height:66px;gap:16px}
-.logo{font-family:'Space Grotesk';font-weight:700;font-size:1.02rem;letter-spacing:.01em;
-  display:flex;align-items:center;gap:10px;white-space:nowrap}
-.logo .dot{width:9px;height:9px;border-radius:50%;background:var(--accent);
-  box-shadow:0 0 14px var(--accent);animation:blip 2.6s infinite}
-@keyframes blip{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.82)}}
-nav ul{display:flex;gap:26px;list-style:none;align-items:center}
-nav a{color:var(--muted);font-size:.855rem;font-weight:500;position:relative;transition:color .2s}
-nav a:hover,nav a.active{color:var(--text)}
-nav a::after{content:"";position:absolute;left:0;bottom:-7px;width:0;height:2px;
-  background:linear-gradient(90deg,var(--accent),var(--accent-2));transition:width .28s var(--ease);border-radius:2px}
-nav a:hover::after,nav a.active::after{width:100%}
-.nav-actions{display:flex;gap:9px;align-items:center}
-.kbtn{border:1px solid var(--line-2);padding:7px 11px;border-radius:9px;font-size:.74rem;
-  color:var(--muted);display:flex;align-items:center;gap:7px;transition:.2s;background:var(--panel)}
-.kbtn:hover{border-color:var(--accent);color:var(--text);background:var(--panel-2)}
-.kbtn kbd{font-family:'JetBrains Mono';font-size:.68rem;background:var(--panel-3);
-  padding:2px 5px;border-radius:4px;border:1px solid var(--line)}
-.nav-cta{border:1px solid var(--line-2);padding:8px 15px;border-radius:9px;
-  color:var(--text)!important;font-size:.82rem;transition:.22s;font-weight:600}
-.nav-cta:hover{border-color:var(--accent);background:var(--glow);transform:translateY(-1px)}
-.burger{display:none;font-size:1.4rem;padding:4px 8px;color:var(--text)}
-
-@media(max-width:900px){
-  nav ul{position:fixed;inset:66px 0 auto 0;flex-direction:column;gap:0;
-    background:var(--bg-2);border-bottom:1px solid var(--line);padding:6px 0;
-    transform:translateY(-135%);transition:transform .34s var(--ease);max-height:calc(100vh - 66px);overflow:auto}
-  nav ul.open{transform:translateY(0)}
-  nav li{padding:0 24px;width:100%}
-  nav a{display:block;padding:14px 0;border-bottom:1px solid var(--line);font-size:.95rem}
-  nav li:last-child a{border:0}
-  .burger{display:block}
-  .kbtn{display:none}
+/* ============================ nav ============================ */
+header{position:sticky;top:0;z-index:60;background:color-mix(in srgb,var(--bg) 88%,transparent);
+       backdrop-filter:saturate(1.6) blur(12px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;gap:18px;height:62px}
+.brand{font-weight:700;letter-spacing:-.03em;font-size:17px;color:var(--ink);white-space:nowrap}
+.brand span{color:var(--accent)}
+.navlinks{display:flex;gap:4px;margin-left:auto;align-items:center}
+.navlinks a{color:var(--ink-2);font-size:14.5px;padding:7px 11px;border-radius:8px;font-weight:520}
+.navlinks a:hover{background:var(--bg-3);color:var(--ink);text-decoration:none}
+.navlinks a.active{color:var(--accent);background:color-mix(in srgb,var(--accent) 10%,transparent)}
+.iconbtn{background:var(--bg-2);border:1px solid var(--line);color:var(--ink-2);width:36px;height:36px;
+         border-radius:9px;cursor:pointer;display:grid;place-items:center;font-size:15px;flex:none}
+.iconbtn:hover{border-color:var(--line-2);color:var(--ink)}
+#menubtn{display:none}
+@media (max-width:860px){
+  .navlinks{position:fixed;inset:62px 0 auto 0;background:var(--bg-2);border-bottom:1px solid var(--line);
+            flex-direction:column;align-items:stretch;padding:10px;gap:2px;box-shadow:var(--shadow)}
+  .navlinks[hidden]{display:none}
+  .navlinks a{padding:11px 14px;font-size:16px}
+  #menubtn{display:grid;margin-left:auto}
+  .nav{gap:10px}
 }
 
-/* ══════════════════════════════════════════════════════════
-   COMMAND PALETTE
-   ══════════════════════════════════════════════════════════ */
-.cmdk-back{position:fixed;inset:0;z-index:200;background:rgba(4,7,12,.78);
-  backdrop-filter:blur(6px);display:none;align-items:flex-start;justify-content:center;padding:12vh 20px}
-.cmdk-back.open{display:flex;animation:fadeIn .18s ease}
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}
-.cmdk{width:100%;max-width:560px;background:var(--panel);border:1px solid var(--line-2);
-  border-radius:16px;overflow:hidden;box-shadow:0 30px 90px -20px rgba(0,0,0,.85);
-  animation:pop .22s var(--ease)}
-@keyframes pop{from{transform:translateY(-14px) scale(.98);opacity:0}to{transform:none;opacity:1}}
-.cmdk input{width:100%;background:none;border:0;padding:17px 20px;font-size:1rem;
-  color:var(--text);border-bottom:1px solid var(--line);outline:none}
-.cmdk input::placeholder{color:var(--faint)}
-.cmdk-list{max-height:340px;overflow:auto;padding:6px}
-.cmdk-item{display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:9px;
-  cursor:pointer;font-size:.9rem;transition:background .12s}
-.cmdk-item .ic{width:26px;height:26px;border-radius:7px;background:var(--panel-3);
-  display:grid;place-items:center;font-size:.78rem;color:var(--accent);flex:none}
-.cmdk-item .sub{color:var(--faint);font-size:.76rem;margin-left:auto;font-family:'JetBrains Mono'}
-.cmdk-item.sel,.cmdk-item:hover{background:var(--panel-3)}
-.cmdk-empty{padding:26px;text-align:center;color:var(--faint);font-size:.88rem}
+/* ============================ hero ============================ */
+.hero{padding-block:clamp(44px,6vw,76px) clamp(30px,4vw,50px);border-top:0}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,.85fr);gap:clamp(26px,4vw,56px);align-items:center}
+@media (max-width:880px){.hero-grid{grid-template-columns:1fr}}
+.status{display:inline-flex;align-items:center;gap:9px;background:color-mix(in srgb,var(--good) 13%,transparent);
+        color:var(--good);border:1px solid color-mix(in srgb,var(--good) 34%,transparent);
+        padding:6px 13px;border-radius:999px;font-size:13.2px;font-weight:600;margin-bottom:20px}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--good);box-shadow:0 0 0 0 color-mix(in srgb,var(--good) 60%,transparent);
+     animation:pulse 2.6s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 9px transparent}100%{box-shadow:0 0 0 0 transparent}}
+.hero h1{font-size:clamp(34px,5.6vw,58px);letter-spacing:-.035em;margin-bottom:14px}
+.hero .role{font-size:clamp(16.5px,2.2vw,20px);color:var(--ink-2);margin-bottom:20px;font-weight:500}
+.hero .role b{color:var(--ink);font-weight:640}
+.hero p.lede{color:var(--ink-2);max-width:60ch;margin:0 0 26px}
+.cta{display:flex;gap:11px;flex-wrap:wrap;margin-bottom:26px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border-radius:10px;font-weight:600;
+     font-size:14.6px;border:1px solid transparent;cursor:pointer;font-family:inherit}
+.btn-primary{background:var(--accent);color:var(--accent-ink)}
+.btn-primary:hover{filter:brightness(1.08);text-decoration:none}
+.btn-ghost{background:var(--bg-2);border-color:var(--line-2);color:var(--ink)}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent);text-decoration:none}
+.sociallinks{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;color:var(--ink-3)}
+.portrait{position:relative}
+.portrait img{border-radius:var(--radius);box-shadow:var(--shadow-lg);border:1px solid var(--line);aspect-ratio:1;object-fit:cover}
+.portrait figcaption{position:absolute;left:12px;bottom:12px;right:12px;background:color-mix(in srgb,var(--bg-2) 88%,transparent);
+        backdrop-filter:blur(8px);border:1px solid var(--line);border-radius:10px;padding:9px 12px;font-size:12.6px;color:var(--ink-2)}
 
-/* ══════════════════════════════════════════════════════════
-   HERO
-   ══════════════════════════════════════════════════════════ */
-/* Vertical only. The shorthand would clobber .wrap's 0 24px, since this
-   rule comes later, and the hero would go full-bleed on narrow screens. */
-.hero{position:relative;padding-top:74px;padding-bottom:56px}
-.hero-grid{display:grid;grid-template-columns:1.35fr .85fr;gap:52px;align-items:center}
-.tagline{display:inline-flex;align-items:center;gap:9px;font-size:.755rem;color:var(--accent);
-  border:1px solid var(--line-2);background:var(--panel);padding:6px 14px;border-radius:30px;
-  margin-bottom:20px;font-weight:600;letter-spacing:.03em}
-.pulse{width:7px;height:7px;border-radius:50%;background:var(--accent);
-  box-shadow:0 0 0 0 var(--glow);animation:pulse 2.2s infinite;flex:none}
-@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(61,214,208,.55)}70%{box-shadow:0 0 0 11px rgba(61,214,208,0)}100%{box-shadow:0 0 0 0 rgba(61,214,208,0)}}
-.hero h1{font-size:clamp(2.5rem,5.6vw,4.1rem);font-weight:700;margin-bottom:16px}
-.grad{background:linear-gradient(100deg,var(--accent),var(--accent-2) 55%,var(--accent-3));
-  -webkit-background-clip:text;background-clip:text;color:transparent}
-.rolebar{font-family:'Space Grotesk';font-weight:600;color:var(--muted);
-  font-size:clamp(1rem,2.1vw,1.28rem);margin-bottom:20px;min-height:1.5em;display:flex;align-items:center;gap:10px}
-.rolebar .cursor{display:inline-block;width:2px;height:1.15em;background:var(--accent);animation:cur .9s step-end infinite}
-@keyframes cur{0%,100%{opacity:1}50%{opacity:0}}
-.hero .lead{color:var(--muted);max-width:570px;margin-bottom:28px;font-size:1.02rem}
-.hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:8px}
-.btn{padding:13px 22px;border-radius:11px;font-weight:600;font-size:.9rem;
-  transition:.24s var(--ease);display:inline-flex;align-items:center;gap:9px;cursor:pointer;border:1px solid transparent}
-.btn-primary{background:linear-gradient(100deg,var(--accent),var(--accent-2));color:#04121a;font-weight:700}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 34px -10px rgba(61,214,208,.5)}
-.btn-ghost{border-color:var(--line-2);color:var(--text);background:var(--panel)}
-.btn-ghost:hover{border-color:var(--accent);background:var(--glow);transform:translateY(-2px)}
+/* ============================ stats ============================ */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(168px,1fr));gap:12px;margin-top:8px}
+.stat{background:var(--bg-2);border:1px solid var(--line);border-radius:var(--radius);padding:18px 18px 16px}
+.stat b{display:block;font-size:clamp(24px,3.4vw,32px);letter-spacing:-.035em;line-height:1.1;color:var(--ink)}
+.stat span{display:block;font-size:13px;color:var(--ink-3);margin-top:5px;line-height:1.4}
 
-.hero-photo{position:relative;justify-self:center}
-.frame{width:280px;height:280px;border-radius:26px;overflow:hidden;position:relative;
-  border:1px solid var(--line-2);box-shadow:0 34px 80px -30px rgba(0,0,0,.9)}
-.frame img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(1.06) contrast(1.02)}
-.frame .mono-fallback{width:100%;height:100%;display:grid;place-items:center;
-  background:linear-gradient(150deg,var(--panel-2),var(--panel));
-  font-family:'Space Grotesk';font-weight:700;font-size:4.4rem;color:var(--accent);letter-spacing:-.03em}
-.ring{position:absolute;inset:-16px;border:1px dashed rgba(61,214,208,.32);border-radius:34px;animation:spin 30s linear infinite}
-.ring2{position:absolute;inset:-30px;border:1px dashed rgba(79,140,255,.16);border-radius:44px;animation:spin 46s linear infinite reverse}
-@keyframes spin{to{transform:rotate(360deg)}}
-.badge-float{position:absolute;bottom:-16px;left:50%;transform:translateX(-50%);
-  background:var(--panel);border:1px solid var(--line-2);border-radius:30px;padding:8px 16px;
-  font-size:.735rem;color:var(--muted);white-space:nowrap;display:flex;gap:8px;align-items:center;
-  box-shadow:0 10px 30px -12px rgba(0,0,0,.7)}
-.badge-float b{color:var(--text)}
-
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:42px}
-.stat{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
-  padding:16px 16px;transition:.28s var(--ease);position:relative;overflow:hidden}
-.stat::before{content:"";position:absolute;inset:0;background:linear-gradient(140deg,var(--glow),transparent 55%);
-  opacity:0;transition:opacity .3s}
-.stat:hover{transform:translateY(-4px);border-color:var(--line-2)}
-.stat:hover::before{opacity:1}
-.stat .n{font-family:'Space Grotesk';font-weight:700;font-size:1.72rem;position:relative}
-.stat .n span{color:var(--accent)}
-.stat .l{font-size:.715rem;color:var(--faint);text-transform:uppercase;letter-spacing:.09em;
-  margin-top:2px;position:relative;line-height:1.4}
-
-@media(max-width:900px){
-  .hero-grid{grid-template-columns:1fr;gap:40px}
-  .hero-photo{order:-1}
-  .frame{width:212px;height:212px}
-  .stats{grid-template-columns:repeat(2,1fr)}
-}
-
-/* ══════════════════════════════════════════════════════════
-   QUICK FACTS
-   ══════════════════════════════════════════════════════════ */
-.facts{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
-  background:linear-gradient(180deg,rgba(16,24,35,.5),transparent);margin-top:52px}
-.facts-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--line)}
-.fact{background:var(--bg);padding:20px 18px}
-.fact .k{font-size:.68rem;color:var(--faint);text-transform:uppercase;letter-spacing:.1em;
-  margin-bottom:6px;font-weight:600}
-.fact .v{font-size:.92rem;font-weight:600;line-height:1.4}
-.fact .v small{display:block;color:var(--muted);font-weight:400;font-size:.79rem;margin-top:2px}
-@media(max-width:1000px){.facts-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:520px){.facts-grid{grid-template-columns:1fr}}
-
-/* ══════════════════════════════════════════════════════════
-   SECTIONS
-   ══════════════════════════════════════════════════════════ */
-section{padding:82px 0;position:relative}
-.sec-head{margin-bottom:44px;max-width:760px}
-.sec-tag{font-family:'JetBrains Mono';color:var(--accent);font-size:.775rem;letter-spacing:.06em;
-  margin-bottom:12px;display:flex;align-items:center;gap:11px;font-weight:500}
-.sec-tag::before{content:"";width:28px;height:1px;background:linear-gradient(90deg,var(--accent),transparent)}
-.sec-head h2{font-size:clamp(1.75rem,3.9vw,2.5rem);font-weight:700}
-.sec-head p{color:var(--muted);margin-top:12px}
-
-/* ══════════════════════════════════════════════════════════
-   RESEARCH
-   ══════════════════════════════════════════════════════════ */
-#research{background:
-  radial-gradient(900px 500px at 90% 0%, rgba(167,125,255,.06), transparent 60%),
-  radial-gradient(700px 500px at 5% 100%, rgba(61,214,208,.05), transparent 60%)}
-.paper{background:linear-gradient(155deg,var(--panel-2),var(--panel));
-  border:1px solid var(--line-2);border-radius:var(--radius-lg);padding:30px;margin-bottom:26px;
-  position:relative;overflow:hidden}
-.paper::after{content:"";position:absolute;top:0;left:0;right:0;height:2px;
-  background:linear-gradient(90deg,var(--accent),var(--accent-2),var(--accent-3))}
-.paper-badges{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
-.pb{font-family:'JetBrains Mono';font-size:.7rem;padding:5px 11px;border-radius:7px;
-  border:1px solid var(--line-2);background:var(--panel-3);color:var(--muted);
-  display:inline-flex;align-items:center;gap:6px;transition:.2s}
-a.pb:hover{border-color:var(--accent);color:var(--text);transform:translateY(-1px)}
-.pb.live{color:var(--ok);border-color:rgba(74,222,128,.3)}
-.pb.doi{color:var(--accent-2);border-color:rgba(79,140,255,.3)}
-.pb.audit{color:var(--ok);border-color:rgba(74,222,128,.3)}
-.paper h3{font-size:clamp(1.2rem,2.6vw,1.62rem);margin-bottom:12px;line-height:1.24}
-.paper .venue{color:var(--muted);font-size:.9rem;margin-bottom:18px}
-.paper .venue b{color:var(--text)}
-.paper .abs{color:var(--muted);font-size:.94rem;max-width:820px}
-.paper .abs strong{color:var(--text)}
-
-.qgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin:24px 0 4px}
-.q{background:rgba(8,11,17,.5);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px}
-.q .num{font-family:'JetBrains Mono';color:var(--accent);font-size:.72rem;margin-bottom:7px;font-weight:600}
-.q p{font-size:.95rem;font-weight:600;line-height:1.45}
-@media(max-width:760px){.qgrid{grid-template-columns:1fr}}
-
-/* tabs */
-.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:22px;
-  background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:5px;width:fit-content;max-width:100%}
-.tab{padding:9px 16px;border-radius:8px;font-size:.855rem;font-weight:600;color:var(--muted);
-  transition:.22s var(--ease);white-space:nowrap}
-.tab:hover{color:var(--text)}
-.tab.on{background:var(--panel-3);color:var(--text);box-shadow:0 2px 10px -4px rgba(0,0,0,.6)}
-.panel{display:none;animation:slideIn .34s var(--ease)}
-.panel.on{display:block}
-@keyframes slideIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-.panel-inner{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius-lg);padding:28px}
-.panel-inner h4{font-size:1.06rem;margin-bottom:8px}
-.panel-inner > p{color:var(--muted);font-size:.94rem;margin-bottom:22px;max-width:760px}
-.panel-inner .note{color:var(--faint);font-size:.85rem;margin-top:20px;padding-top:18px;
-  border-top:1px solid var(--line);max-width:800px}
-
-/* chart */
-.chart{display:flex;flex-direction:column;gap:14px;margin:6px 0 4px}
-.bar-row{display:grid;grid-template-columns:150px 1fr 100px;gap:14px;align-items:center;font-size:.85rem}
-.bar-row .lbl{color:var(--muted);font-weight:500;text-align:right}
-.bar-track{height:30px;background:var(--panel-3);border-radius:7px;overflow:hidden;position:relative;border:1px solid var(--line)}
-.bar-fill{height:100%;width:0;border-radius:6px;transition:width 1.15s var(--ease);
-  background:linear-gradient(90deg,var(--accent-2),var(--accent));position:relative}
-.bar-fill.warn{background:linear-gradient(90deg,#c2410c,var(--warn))}
-.bar-fill.bad{background:linear-gradient(90deg,#9f1239,var(--danger))}
-.bar-fill.good{background:linear-gradient(90deg,#15803d,var(--ok))}
-.bar-row .val{font-family:'JetBrains Mono';font-size:.83rem;font-weight:600}
-.bar-row .val small{color:var(--faint);font-weight:400}
-@media(max-width:640px){
-  .bar-row{grid-template-columns:1fr;gap:5px}
-  .bar-row .lbl{text-align:left;font-size:.8rem}
-  .bar-row .val{font-size:.78rem}
-}
-.nominal-line{display:flex;align-items:center;gap:10px;margin-top:14px;font-size:.8rem;color:var(--faint)}
-.nominal-line i{display:block;width:26px;height:0;border-top:2px dashed var(--muted)}
-
-/* table */
-.tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);margin-top:4px}
-table{width:100%;border-collapse:collapse;font-size:.855rem;min-width:600px}
-th,td{padding:12px 14px;text-align:left;border-bottom:1px solid var(--line)}
-th{background:var(--panel-3);font-family:'JetBrains Mono';font-size:.73rem;color:var(--muted);
-  text-transform:uppercase;letter-spacing:.06em;font-weight:600}
-tbody tr{transition:background .18s}
-tbody tr:hover{background:var(--panel-2)}
-tbody tr:last-child td{border-bottom:0}
-td.n{font-family:'JetBrains Mono';font-size:.82rem}
-.best{color:var(--ok);font-weight:600}
-.tag-yes{color:var(--accent);font-weight:600}
-.tag-no{color:var(--faint)}
-
-/* pipeline */
-.pipe{display:grid;grid-template-columns:repeat(5,1fr);gap:0;margin:8px 0 6px}
-.pipe-step{background:var(--panel-3);border:1px solid var(--line);padding:15px 13px;
-  position:relative;transition:.26s var(--ease)}
-.pipe-step:first-child{border-radius:11px 0 0 11px}
-.pipe-step:last-child{border-radius:0 11px 11px 0}
-.pipe-step:not(:last-child){border-right:0}
-.pipe-step:hover{background:var(--panel-2);transform:translateY(-3px);border-color:var(--accent);z-index:2}
-.pipe-step .s{font-family:'JetBrains Mono';font-size:.66rem;color:var(--accent);margin-bottom:6px}
-.pipe-step .t{font-weight:600;font-size:.83rem;margin-bottom:4px;line-height:1.3}
-.pipe-step .d{font-size:.73rem;color:var(--faint);line-height:1.45}
-.pipe-step.verify{border-color:rgba(74,222,128,.35);background:rgba(74,222,128,.05)}
-.pipe-step.verify .s{color:var(--ok)}
-@media(max-width:900px){
-  .pipe{grid-template-columns:1fr}
-  .pipe-step{border-right:1px solid var(--line)!important;border-bottom:0}
-  .pipe-step:not(:last-child){border-bottom:0}
-  .pipe-step:first-child{border-radius:11px 11px 0 0}
-  .pipe-step:last-child{border-radius:0 0 11px 11px}
-  .pipe-step:not(:last-child){border-bottom:0}
-}
-.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:24px}
-.metric{background:var(--panel-3);border:1px solid var(--line);border-radius:var(--radius);padding:16px}
-.metric .m{font-family:'Space Grotesk';font-weight:700;font-size:1.34rem;color:var(--accent)}
-.metric .c{font-size:.73rem;color:var(--faint);margin-top:3px;line-height:1.45}
-@media(max-width:760px){.metrics{grid-template-columns:repeat(2,1fr)}}
-
-.honest{background:linear-gradient(150deg,rgba(255,180,84,.07),transparent);
-  border:1px solid rgba(255,180,84,.24);border-radius:var(--radius);padding:20px 22px;margin-top:20px}
-.honest h5{font-family:'Space Grotesk';font-size:.94rem;color:var(--warn);margin-bottom:8px;
-  display:flex;align-items:center;gap:8px}
-.honest p{font-size:.9rem;color:var(--muted)}
-.honest p strong{color:var(--text)}
-
-/* ══════════════════════════════════════════════════════════
-   ABOUT
-   ══════════════════════════════════════════════════════════ */
-.about-grid{display:grid;grid-template-columns:1.45fr 1fr;gap:40px}
-.about-text p{color:var(--muted);margin-bottom:18px}
-.about-text p strong{color:var(--text)}
-.hl-card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius-lg);padding:26px;
-  height:fit-content;position:sticky;top:92px}
-.hl-card h4{font-size:.95rem;margin-bottom:18px;display:flex;align-items:center;gap:9px}
-.hl-card ul{list-style:none}
-.hl-card li{display:flex;gap:12px;padding:11px 0;font-size:.885rem;color:var(--muted);
-  border-bottom:1px solid var(--line);line-height:1.5}
-.hl-card li:last-child{border:0;padding-bottom:0}
-.hl-card li .arr{color:var(--accent);font-family:'JetBrains Mono';flex:none}
-@media(max-width:900px){.about-grid{grid-template-columns:1fr}.hl-card{position:static}}
-
-/* ══════════════════════════════════════════════════════════
-   TIMELINE
-   ══════════════════════════════════════════════════════════ */
-.timeline{position:relative;padding-left:36px}
-.timeline::before{content:"";position:absolute;left:8px;top:8px;bottom:8px;width:1px;
-  background:linear-gradient(180deg,var(--accent),var(--accent-2) 40%,var(--line))}
-.tl-item{position:relative;margin-bottom:16px;background:var(--panel);border:1px solid var(--line);
-  border-radius:var(--radius);padding:20px 22px;transition:.28s var(--ease)}
-.tl-item:hover{border-color:var(--line-2);transform:translateX(4px)}
-.tl-item::before{content:"";position:absolute;left:-36px;top:24px;width:17px;height:17px;border-radius:50%;
-  background:var(--bg);border:2px solid var(--accent);box-shadow:0 0 0 4px rgba(61,214,208,.09);transition:.3s}
-.tl-item:hover::before{box-shadow:0 0 0 7px rgba(61,214,208,.13)}
-.tl-top{display:flex;gap:15px;align-items:flex-start}
-.co-logo{width:44px;height:44px;border-radius:10px;object-fit:contain;border:1px solid var(--line);
-  background:#fff;flex:none;padding:3px}
-.co-fallback{width:44px;height:44px;border-radius:10px;border:1px solid var(--line);flex:none;
-  display:grid;place-items:center;background:var(--panel-3);font-family:'Space Grotesk';
-  font-weight:700;color:var(--accent);font-size:1.05rem}
-.tl-meta{display:flex;flex-wrap:wrap;gap:9px;align-items:center;margin-bottom:6px}
-.tl-date{font-family:'JetBrains Mono';font-size:.745rem;color:var(--accent)}
-.tl-type{font-size:.68rem;color:var(--faint);border:1px solid var(--line);padding:2px 9px;
-  border-radius:20px;text-transform:uppercase;letter-spacing:.05em}
-.tl-item h3{font-size:1.06rem;font-weight:600;margin-bottom:3px;line-height:1.3}
-.tl-co{color:var(--accent-2);font-size:.885rem;font-weight:500;margin-bottom:12px}
-.tl-co .loc{color:var(--faint);font-weight:400}
-.tl-item ul{list-style:none;margin-bottom:13px}
-.tl-item ul li{color:var(--muted);font-size:.885rem;padding:4px 0 4px 20px;position:relative;line-height:1.55}
-.tl-item ul li::before{content:"▸";position:absolute;left:0;color:var(--accent);font-size:.72rem;top:6px}
-.chips{display:flex;flex-wrap:wrap;gap:7px}
-.chip{font-family:'JetBrains Mono';font-size:.71rem;color:var(--muted);background:var(--panel-3);
-  border:1px solid var(--line);padding:4px 10px;border-radius:6px;transition:.2s}
-.chip:hover{border-color:var(--accent);color:var(--text)}
-
-/* ══════════════════════════════════════════════════════════
-   FILTERS / PROJECTS
-   ══════════════════════════════════════════════════════════ */
+/* ============================ cards / grid ============================ */
 .filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:26px}
-.f-btn{padding:7px 15px;border-radius:20px;font-size:.79rem;font-weight:600;color:var(--muted);
-  border:1px solid var(--line);background:var(--panel);transition:.22s var(--ease)}
-.f-btn:hover{color:var(--text);border-color:var(--line-2)}
-.f-btn.on{background:var(--glow);border-color:var(--accent);color:var(--accent)}
-.proj-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
-.proj{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius-lg);
-  overflow:hidden;transition:.32s var(--ease);position:relative;display:flex;flex-direction:column}
-.proj::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;
-  background:linear-gradient(90deg,var(--accent),var(--accent-2));transform:scaleX(0);
-  transform-origin:left;transition:transform .38s var(--ease);z-index:2}
-.proj:hover{transform:translateY(-5px);border-color:var(--line-2);background:var(--panel-2)}
-.proj:hover::before{transform:scaleX(1)}
-.proj.hide{display:none}
-.proj-img{border-bottom:1px solid var(--line);overflow:hidden;background:var(--bg-2);height:180px}
-.proj-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s var(--ease)}
-.proj:hover .proj-img img{transform:scale(1.06)}
-.proj-body{padding:22px;display:flex;flex-direction:column;flex:1}
-.pdate{font-family:'JetBrains Mono';font-size:.72rem;color:var(--faint);margin-bottom:10px;
-  display:flex;justify-content:space-between;align-items:center;gap:10px}
-.pdate .tagm{color:var(--accent)}
-.proj h3{font-size:1.02rem;font-weight:600;margin-bottom:10px;line-height:1.32}
-.proj p{color:var(--muted);font-size:.865rem;margin-bottom:14px;flex:1}
-@media(max-width:760px){.proj-grid{grid-template-columns:1fr}}
+.chip{background:var(--bg-2);border:1px solid var(--line);color:var(--ink-2);padding:7px 14px;border-radius:999px;
+      font-size:13.6px;cursor:pointer;font-family:inherit;font-weight:540;white-space:nowrap}
+.chip:hover{border-color:var(--line-2);color:var(--ink)}
+.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.chip .n{opacity:.6;font-size:12px;margin-left:4px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:18px}
+.card{background:var(--bg-2);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;
+      display:flex;flex-direction:column;text-align:left;cursor:pointer;padding:0;font-family:inherit;color:inherit;
+      transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}
+.card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg);border-color:var(--line-2)}
+.card-img{aspect-ratio:16/9;background:var(--bg-3);overflow:hidden;position:relative;flex:none}
+.card-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease}
+.card:hover .card-img img{transform:scale(1.04)}
+.card-img.contain img{object-fit:contain;padding:8px;background:var(--bg-2)}
+.noimg{display:grid;place-items:center;height:100%;color:var(--ink-3);font-family:var(--mono);font-size:12px;
+       background:repeating-linear-gradient(45deg,var(--bg-3),var(--bg-3) 10px,var(--bg-2) 10px,var(--bg-2) 20px)}
+.card-body{padding:16px 17px 18px;display:flex;flex-direction:column;gap:9px;flex:1}
+.card h3{font-size:17.2px;letter-spacing:-.025em}
+.card .meta{font-family:var(--mono);font-size:11.6px;color:var(--ink-3);letter-spacing:.02em}
+.card p{margin:0;font-size:14.4px;color:var(--ink-2);line-height:1.55}
+.tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:auto;padding-top:4px}
+.tag{font-size:11.4px;font-family:var(--mono);background:var(--bg-3);border:1px solid var(--line);
+     color:var(--ink-3);padding:3px 8px;border-radius:6px}
+.tag.hi{color:var(--accent);border-color:color-mix(in srgb,var(--accent) 34%,transparent);
+        background:color-mix(in srgb,var(--accent) 10%,transparent)}
+.more{font-size:13.4px;color:var(--accent);font-weight:600}
 
-/* ══════════════════════════════════════════════════════════
-   GALLERY + LIGHTBOX
-   ══════════════════════════════════════════════════════════ */
-.gal-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.gal-item{position:relative;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);
-  margin:0;background:var(--bg-2);aspect-ratio:4/3;cursor:zoom-in;transition:.3s var(--ease)}
-.gal-item:hover{border-color:var(--accent);transform:translateY(-3px)}
-.gal-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .55s var(--ease)}
-.gal-item:hover img{transform:scale(1.07)}
-.gal-fallback{width:100%;height:100%;display:grid;place-items:center;
-  background:linear-gradient(140deg,var(--panel-2),var(--panel));color:var(--faint);
-  font-family:'JetBrains Mono';font-size:.78rem;padding:20px;text-align:center}
-.gal-item figcaption{position:absolute;left:0;right:0;bottom:0;padding:28px 15px 12px;font-size:.79rem;
-  color:#e2ecf6;background:linear-gradient(transparent,rgba(5,8,13,.94));
-  font-family:'JetBrains Mono';letter-spacing:.005em;line-height:1.4}
-@media(max-width:900px){.gal-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:520px){.gal-grid{grid-template-columns:1fr}}
+/* ============================ research feature ============================ */
+.feature{background:var(--bg-2);border:1px solid var(--line);border-radius:var(--radius);padding:clamp(20px,3vw,34px)}
+.feature-head{display:flex;gap:14px;align-items:flex-start;flex-wrap:wrap;margin-bottom:20px}
+.feature h3{font-size:clamp(20px,2.6vw,27px);flex:1;min-width:240px}
+.findings{display:grid;grid-template-columns:repeat(auto-fit,minmax(232px,1fr));gap:14px;margin:22px 0}
+.finding{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:var(--radius-sm);
+         padding:15px 16px;background:var(--bg)}
+.finding b{display:block;font-size:13px;font-family:var(--mono);color:var(--accent);margin-bottom:7px;letter-spacing:.02em}
+.finding p{margin:0;font-size:14.2px;color:var(--ink-2)}
+.finding.neg{border-left-color:var(--warn)}
+.finding.neg b{color:var(--warn)}
+.figrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-top:20px}
+figure{margin:0}
+.fig{background:var(--bg);border:1px solid var(--line);border-radius:var(--radius-sm);padding:10px;cursor:zoom-in}
+.fig img{border-radius:5px;background:#fff}
+.fig figcaption{font-size:12.4px;color:var(--ink-3);margin-top:9px;line-height:1.45}
 
-.lb{position:fixed;inset:0;z-index:220;background:rgba(4,7,12,.94);backdrop-filter:blur(8px);
-  display:none;align-items:center;justify-content:center;padding:36px 20px;flex-direction:column;gap:16px}
-.lb.open{display:flex;animation:fadeIn .2s ease}
-.lb img{max-width:min(1000px,92vw);max-height:78vh;border-radius:12px;border:1px solid var(--line-2);
-  box-shadow:0 40px 100px -30px rgba(0,0,0,.9)}
-.lb .cap{color:var(--muted);font-family:'JetBrains Mono';font-size:.85rem;text-align:center}
-.lb .close{position:absolute;top:20px;right:24px;font-size:1.8rem;color:var(--muted);line-height:1}
-.lb .close:hover{color:var(--text)}
-.lb .nav-arrow{position:absolute;top:50%;transform:translateY(-50%);font-size:2rem;color:var(--muted);
-  padding:16px;transition:.2s}
-.lb .nav-arrow:hover{color:var(--accent)}
-.lb .prev{left:10px}.lb .next{right:10px}
+/* ============================ thesis ============================ */
+.th-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(288px,1fr));gap:16px}
+.th{background:var(--bg-2);border:1px solid var(--line);border-radius:var(--radius);padding:20px 20px 18px}
+.th h3{font-size:17.6px;margin-bottom:10px}
+.th .num{font-family:var(--mono);font-size:12px;color:var(--accent);display:block;margin-bottom:6px}
+.th dt{font-size:12px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.08em;margin-top:13px;color:var(--ink-3)}
+.th dd{margin:5px 0 0;font-size:14.2px;color:var(--ink-2)}
+.th dt.ready{color:var(--good)} .th dt.ramp{color:var(--warn)}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1px;background:var(--line);
+       border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin-bottom:26px}
+.facts div{background:var(--bg-2);padding:15px 17px}
+.facts dt{font-size:11.6px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3)}
+.facts dd{margin:5px 0 0;font-size:14.6px;color:var(--ink);font-weight:560}
 
-/* ══════════════════════════════════════════════════════════
-   EDUCATION / AWARDS
-   ══════════════════════════════════════════════════════════ */
-.edu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.edu{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius-lg);padding:24px;
-  transition:.3s var(--ease);position:relative;overflow:hidden}
-.edu:hover{border-color:var(--line-2);transform:translateY(-4px)}
-.edu .yr{font-family:'JetBrains Mono';font-size:.735rem;color:var(--accent);margin-bottom:13px}
-.edu h3{font-size:1.02rem;margin-bottom:7px;line-height:1.3}
-.edu .deg{color:var(--text);font-size:.885rem;font-weight:600;margin-bottom:5px}
-.edu .fld{color:var(--muted);font-size:.825rem;line-height:1.55}
-@media(max-width:900px){.edu-grid{grid-template-columns:1fr}}
+/* ============================ timeline ============================ */
+.tl{position:relative;padding-left:26px}
+.tl::before{content:"";position:absolute;left:6px;top:6px;bottom:6px;width:2px;background:var(--line)}
+.tl-item{position:relative;padding-bottom:26px}
+.tl-item::before{content:"";position:absolute;left:-25px;top:7px;width:11px;height:11px;border-radius:50%;
+        background:var(--bg);border:2.5px solid var(--accent)}
+.tl-item.edu::before{border-color:var(--accent-2)}
+.tl-when{font-family:var(--mono);font-size:12.2px;color:var(--ink-3)}
+.tl-what{font-weight:640;font-size:16.4px;margin-top:2px}
+.tl-where{color:var(--ink-2);font-size:14.4px}
+.tl-note{color:var(--ink-3);font-size:13.8px;margin-top:5px}
 
-.award-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.award{background:linear-gradient(160deg,var(--panel),var(--bg-2));border:1px solid var(--line);
-  border-radius:var(--radius-lg);overflow:hidden;transition:.3s var(--ease);display:flex;flex-direction:column}
-.award:hover{transform:translateY(-5px);border-color:var(--accent)}
-.award-img{height:158px;overflow:hidden;border-bottom:1px solid var(--line);background:var(--bg-2);cursor:zoom-in}
-.award-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s var(--ease)}
-.award:hover .award-img img{transform:scale(1.06)}
-.award-body{padding:22px;flex:1}
-.award .yr{font-family:'JetBrains Mono';font-size:.72rem;color:var(--accent);float:right}
-.award .ic{font-size:1.5rem;margin-bottom:10px}
-.award h3{font-size:.99rem;margin-bottom:8px;clear:both;line-height:1.32}
-.award p{color:var(--muted);font-size:.845rem}
-@media(max-width:900px){.award-grid{grid-template-columns:1fr}}
+/* ============================ skills ============================ */
+.skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:12px}
+.skill{background:var(--bg-2);border:1px solid var(--line);border-radius:var(--radius-sm);padding:14px 16px}
+.skill-top{display:flex;justify-content:space-between;gap:12px;align-items:baseline;margin-bottom:9px}
+.skill-name{font-weight:600;font-size:14.8px}
+.skill-lvl{font-family:var(--mono);font-size:11.4px;color:var(--ink-3);white-space:nowrap}
+.bar{height:5px;border-radius:3px;background:var(--bg-3);overflow:hidden}
+.bar i{display:block;height:100%;border-radius:3px;background:linear-gradient(90deg,var(--accent),var(--accent-2));
+       width:0;transition:width 1.1s cubic-bezier(.22,1,.36,1)}
+.skill small{display:block;color:var(--ink-3);font-size:12.6px;margin-top:8px}
 
-/* ══════════════════════════════════════════════════════════
-   SKILLS
-   ══════════════════════════════════════════════════════════ */
-.skill-cats{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
-.skill-cat{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius-lg);padding:24px;
-  transition:.3s var(--ease)}
-.skill-cat:hover{border-color:var(--line-2)}
-.skill-cat h4{font-size:.79rem;text-transform:uppercase;letter-spacing:.08em;color:var(--accent);
-  margin-bottom:18px;font-family:'JetBrains Mono';display:flex;align-items:center;gap:9px}
-.skill-row{margin-bottom:13px}
-.skill-row:last-child{margin-bottom:0}
-.skill-top{display:flex;justify-content:space-between;font-size:.845rem;margin-bottom:5px;align-items:center}
-.skill-top .lvl{font-family:'JetBrains Mono';font-size:.7rem;color:var(--faint)}
-.skill-track{height:5px;background:var(--panel-3);border-radius:4px;overflow:hidden}
-.skill-fill{height:100%;width:0;border-radius:4px;transition:width 1.1s var(--ease);
-  background:linear-gradient(90deg,var(--accent-2),var(--accent))}
-@media(max-width:760px){.skill-cats{grid-template-columns:1fr}}
+/* ============================ credentials ============================ */
+.creds{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+.cred{background:var(--bg-2);border:1px solid var(--line);border-radius:var(--radius-sm);padding:15px 17px}
+.cred h4{font-size:14.6px;margin-bottom:8px}
+.cred ul{margin:0;padding-left:17px;color:var(--ink-2);font-size:14px}
+.cred li{margin-bottom:5px}
 
-/* ══════════════════════════════════════════════════════════
-   CERTS
-   ══════════════════════════════════════════════════════════ */
-.cert-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-.cert{display:flex;gap:15px;align-items:flex-start;background:var(--panel);border:1px solid var(--line);
-  border-radius:12px;padding:17px 19px;transition:.26s var(--ease)}
-.cert:hover{border-color:var(--line-2);transform:translateY(-2px);background:var(--panel-2)}
-.cert-logo{width:38px;height:38px;border-radius:9px;object-fit:contain;border:1px solid var(--line);
-  background:#fff;flex:none;padding:3px}
-.cert-fallback{width:38px;height:38px;border-radius:9px;border:1px solid var(--line);flex:none;
-  display:grid;place-items:center;background:var(--panel-3);color:var(--accent);font-size:1rem}
-.cert h4{font-size:.9rem;font-weight:600;margin-bottom:3px;line-height:1.34}
-.cert .iss{color:var(--muted);font-size:.795rem}
-.cert .dt{color:var(--faint);font-size:.735rem;font-family:'JetBrains Mono';margin-top:2px}
-@media(max-width:760px){.cert-grid{grid-template-columns:1fr}}
+/* ============================ contact ============================ */
+.contact{background:var(--bg-2);border:1px solid var(--line);border-radius:var(--radius);
+         padding:clamp(26px,4vw,44px);text-align:center}
+.contact h2{font-size:clamp(23px,3.2vw,32px);margin-bottom:12px}
+.contact p{color:var(--ink-2);max-width:58ch;margin:0 auto 24px}
+footer{border-top:1px solid var(--line);padding-block:28px;color:var(--ink-3);font-size:13.4px}
+.foot{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
 
-/* ══════════════════════════════════════════════════════════
-   CONTACT
-   ══════════════════════════════════════════════════════════ */
-.contact{text-align:center;background:linear-gradient(180deg,transparent,var(--bg-2));
-  border-top:1px solid var(--line);border-radius:26px 26px 0 0;padding:84px 0 74px;margin-top:20px}
-.contact h2{font-size:clamp(2rem,4.8vw,3rem);margin-bottom:16px}
-.contact p{color:var(--muted);max-width:540px;margin:0 auto 32px}
-.open-tag{display:inline-flex;align-items:center;gap:9px;font-size:.8rem;color:var(--accent);
-  border:1px solid var(--line-2);background:var(--panel);padding:8px 18px;border-radius:30px;
-  margin-bottom:28px;font-weight:600}
-.contact-links{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-bottom:18px}
-.copied{color:var(--ok)!important}
-footer{padding:34px 0;border-top:1px solid var(--line);text-align:center;color:var(--faint);font-size:.8rem}
-footer .mono{color:var(--muted)}
-footer a{color:var(--muted)}
-footer a:hover{color:var(--accent)}
-
-/* ══════════════════════════════════════════════════════════
-   REVEAL
-   ══════════════════════════════════════════════════════════ */
-.reveal{opacity:0;transform:translateY(24px);transition:opacity .68s var(--ease),transform .68s var(--ease)}
-.reveal.in{opacity:1;transform:none}
-@media(prefers-reduced-motion:reduce){
-  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;
-    transition-duration:.01ms!important;scroll-behavior:auto!important}
-  .reveal{opacity:1;transform:none}
-  #flow{display:none}
-}
-
-/* ══════════════════════════════════════════════════════════
-   PRINT
-   ══════════════════════════════════════════════════════════ */
-@media print{
-  :root{--bg:#fff;--text:#111;--muted:#444;--faint:#666;--panel:#fff;--panel-2:#fff;
-    --panel-3:#f4f6f9;--line:#ddd;--line-2:#ccc;--accent:#0a6b66;--accent-2:#1e4fa8}
-  body::before,body::after,#flow,#progress,.cmdk-back,.lb,.ring,.ring2,.burger,.kbtn{display:none!important}
-  header.nav{position:static;background:none;border-bottom:1px solid #ddd}
-  nav ul{display:none}
-  section{padding:22px 0;page-break-inside:avoid}
-  .reveal{opacity:1!important;transform:none!important}
-  .proj,.edu,.award,.cert,.tl-item,.skill-cat{page-break-inside:avoid}
-  a[href^="http"]::after{content:" (" attr(href) ")";font-size:.7em;color:#666}
-}
+/* ============================ modal ============================ */
+.modal[hidden]{display:none!important}
+.modal{position:fixed;inset:0;z-index:90;display:grid;place-items:center;padding:18px}
+.backdrop{position:absolute;inset:0;background:rgba(4,10,16,.62);backdrop-filter:blur(3px)}
+.sheet{position:relative;background:var(--bg-2);border:1px solid var(--line);border-radius:var(--radius);
+       max-width:920px;width:100%;max-height:88vh;overflow-y:auto;box-shadow:var(--shadow-lg)}
+.sheet-head{position:sticky;top:0;background:var(--bg-2);border-bottom:1px solid var(--line);
+            padding:18px 22px;display:flex;gap:14px;align-items:flex-start;z-index:2}
+.sheet-head h3{font-size:20.5px;flex:1}
+.sheet-body{padding:20px 22px 26px}
+.sheet-body h4{font-size:13.4px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.09em;
+               color:var(--ink-3);margin:22px 0 10px}
+.sheet-body h4:first-child{margin-top:0}
+.sheet-body p{margin:0 0 12px;color:var(--ink-2);font-size:15px}
+.kv{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.kv div{background:var(--bg);border:1px solid var(--line);border-radius:var(--radius-sm);padding:11px 13px}
+.kv dt{font-size:11.4px;font-family:var(--mono);color:var(--ink-3);text-transform:uppercase;letter-spacing:.06em}
+.kv dd{margin:4px 0 0;font-weight:620;font-size:15px}
+.sheet ul{margin:0 0 12px;padding-left:19px;color:var(--ink-2);font-size:14.8px}
+.sheet li{margin-bottom:6px}
+.lightbox[hidden]{display:none!important}
+.lightbox{position:fixed;inset:0;z-index:120;background:rgba(4,10,16,.9);display:grid;place-items:center;padding:26px;cursor:zoom-out}
+.lightbox img{max-width:96vw;max-height:84vh;object-fit:contain;background:#fff;border-radius:8px;padding:8px}
+.lightbox p{color:#dfe7ef;font-size:14px;margin:14px auto 0;max-width:70ch;text-align:center}
+.js .reveal{opacity:0;transform:translateY(14px)}
+.js .reveal.in{opacity:1;transform:none;transition:opacity .6s ease,transform .6s cubic-bezier(.22,1,.36,1)}
+.skip{position:absolute;left:-9999px}
+.skip:focus{left:12px;top:10px;z-index:200;background:var(--accent);color:var(--accent-ink);padding:9px 14px;border-radius:8px}
+@media print{header,.cta,.filters,.modal,.lightbox,.iconbtn{display:none!important} body{background:#fff;color:#000}}
 </style>
 </head>
 <body>
+<script>document.documentElement.classList.add('js')</script>
+<a class="skip" href="#work">Skip to work</a>
 
-<canvas id="flow"></canvas>
-<div id="progress"></div>
-
-<!-- ══════════ COMMAND PALETTE ══════════ -->
-<div class="cmdk-back" id="cmdk-back">
-  <div class="cmdk" role="dialog" aria-label="Command palette">
-    <input id="cmdk-input" type="text" placeholder="Jump to a section, copy contact, open the paper…" autocomplete="off" />
-    <div class="cmdk-list" id="cmdk-list"></div>
-  </div>
-</div>
-
-<!-- ══════════ LIGHTBOX ══════════ -->
-<div class="lb" id="lb" role="dialog" aria-label="Image viewer">
-  <button class="close" id="lb-close" aria-label="Close">&times;</button>
-  <button class="nav-arrow prev" id="lb-prev" aria-label="Previous">&#8249;</button>
-  <button class="nav-arrow next" id="lb-next" aria-label="Next">&#8250;</button>
-  <img id="lb-img" alt="" />
-  <div class="cap" id="lb-cap"></div>
-</div>
-
-<!-- ══════════ NAV ══════════ -->
-<header class="nav" id="nav">
-  <div class="wrap nav-inner">
-    <a href="#top" class="logo"><span class="dot"></span>Hassaan Shahid</a>
-    <nav>
-      <ul id="menu">
-        <li><a href="#research">Research</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#experience">Experience</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#gallery">Hardware</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#contact" class="nav-cta">Get in touch</a></li>
-      </ul>
-    </nav>
-    <div class="nav-actions">
-      <button class="kbtn" id="cmdk-open" aria-label="Open command palette">Search <kbd>⌘K</kbd></button>
-      <button class="burger" id="burger" aria-label="Menu">&#9776;</button>
+<header>
+  <nav class="wrap nav" aria-label="Main">
+    <a class="brand" href="#top">Hassaan <span>Shahid</span></a>
+    <button class="iconbtn" id="menubtn" aria-expanded="false" aria-controls="navlinks" aria-label="Menu">☰</button>
+    <div class="navlinks" id="navlinks">
+      <a href="#work">Work</a>
+      <a href="#research">Research</a>
+      <a href="#thesis">Thesis</a>
+      <a href="#experience">Experience</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+      <button class="iconbtn" id="theme" aria-label="Switch colour theme" title="Switch theme">◐</button>
     </div>
-  </div>
+  </nav>
 </header>
 
-<a id="top"></a>
+<main id="top">
 
-<!-- ══════════ HERO ══════════ -->
-<section class="hero wrap" style="padding-top:74px">
+<!-- ============================ HERO ============================ -->
+<section class="hero wrap">
   <div class="hero-grid">
-    <div class="reveal">
-      <span class="tagline"><span class="pulse"></span> Aerospace Engineer &amp; Researcher · Linköping, Sweden</span>
-      <h1>I make aircraft models<br><span class="grad">you can actually trust.</span></h1>
-      <div class="rolebar"><span id="roletext"></span><span class="cursor"></span></div>
-      <p class="lead">
-        I design, model and validate aerial platforms end-to-end — concept, CAD, CFD, fabrication, flight test —
-        and I publish research on <strong style="color:var(--text)">when a fast model is safe to put inside a decision loop</strong>.
-        MSc Aeronautical Engineering at Linköping University.
-      </p>
-      <div class="hero-cta">
-        <a href="#research" class="btn btn-primary">Read the research &rarr;</a>
-        <a href="#experience" class="btn btn-ghost">Engineering work</a>
-        <a href="https://www.linkedin.com/in/hassaan-shahid-b1b285280" target="_blank" rel="noopener" class="btn btn-ghost">LinkedIn</a>
+    <div>
+      <p class="status"><span class="dot" aria-hidden="true"></span> Available for a 30 hp master thesis, January to June 2027</p>
+      <h1>Aeronautical engineer,<br>simulation to the flight line.</h1>
+      <p class="role">M.Sc. Aeronautical Engineering, <b>Linköping University</b> · Linköping, Sweden</p>
+      <p class="lede">I build the loop that turns physics into a decision you can defend: a verified PDE
+      forward model, a surrogate fast enough to sit inside a control law, and a calibrated bound on how
+      far that surrogate can be trusted. Sole-authored preprint in physics-informed machine learning.
+      Team captain of Linköping University's SAE AeroDesign team.</p>
+      <div class="cta">
+        <a class="btn btn-primary" href="#work">See the work</a>
+        <a class="btn btn-ghost" href="#thesis">Thesis fit &amp; availability</a>
+        <a class="btn btn-ghost" href="mailto:hassaanshahid97@gmail.com">Email me</a>
+      </div>
+      <div class="sociallinks">
+        <a href="https://github.com/hassaanshahid97-cyber">GitHub</a>
+        <a href="https://www.linkedin.com/in/hassaan-shahid-b1b285280">LinkedIn</a>
+        <a href="https://orcid.org/0009-0003-7403-8933">ORCID 0009-0003-7403-8933</a>
+        <a href="https://doi.org/10.5281/zenodo.21788995">Preprint DOI</a>
       </div>
     </div>
-    <div class="hero-photo reveal">
-      <div class="ring2"></div>
-      <div class="ring"></div>
-      <div class="frame" id="photoFrame"></div>
-      <div class="badge-float"><span class="pulse"></span> <b>Open to work</b> · UAV &amp; Flight Control</div>
-    </div>
+    <figure class="portrait">
+      <img src="images/profile.jpg" alt="Hassaan Shahid" width="600" height="600">
+      <figcaption>Linköping, Sweden · EASA UAS A1/A3 remote pilot · open to Scandinavia and Denmark</figcaption>
+    </figure>
   </div>
 
-  <div class="stats">
-    <div class="stat reveal"><div class="n"><span data-count="1">0</span></div><div class="l">Peer-review submission<br>Taylor &amp; Francis</div></div>
-    <div class="stat reveal"><div class="n"><span data-count="104">0</span><span>/104</span></div><div class="l">Claims re-verified<br>by audit script</div></div>
-    <div class="stat reveal"><div class="n"><span data-count="3">0</span><span>&times;</span></div><div class="l">National competition<br>wins &amp; podiums</div></div>
-    <div class="stat reveal"><div class="n"><span data-count="8">0</span><span>+</span></div><div class="l">Aero platforms<br>built &amp; flown</div></div>
+  <div class="stats" style="margin-top:38px">
+    <div class="stat reveal"><b data-count="1">1</b><span>Sole-authored preprint, submitted Aug 2026</span></div>
+    <div class="stat reveal"><b data-count="45" data-suffix="×">45×</b><span>Seed-to-seed error variance cut by the physics residual</span></div>
+    <div class="stat reveal"><b data-count="3.2" data-suffix="M">3.2M</b><span>Element near-wall RANS mesh at y+ &lt; 5</span></div>
+    <div class="stat reveal"><b data-count="104" data-suffix="/104">104/104</b><span>Manuscript claims machine-audited against stored results</span></div>
   </div>
 </section>
 
-<!-- ══════════ QUICK FACTS ══════════ -->
-<div class="facts">
-  <div class="wrap" style="padding:0">
-    <div class="facts-grid">
-      <div class="fact"><div class="k">Based in</div><div class="v">Linköping, Sweden<small>Open to EU relocation / hybrid</small></div></div>
-      <div class="fact"><div class="k">Work authorisation</div><div class="v">No sponsorship needed<small>Valid to August 2028</small></div></div>
-      <div class="fact"><div class="k">Seeking</div><div class="v">Entry–mid level<small>UAV · Flight control · Systems</small></div></div>
-      <div class="fact"><div class="k">Core stack</div><div class="v">MATLAB · Simulink · JAX<small>ANSYS · CATIA · ArduPilot</small></div></div>
-      <div class="fact"><div class="k">Languages</div><div class="v">English (IELTS)<small>Urdu · Swedish (learning)</small></div></div>
+<!-- ============================ RESEARCH ============================ -->
+<section id="research">
+  <div class="wrap">
+    <p class="eyebrow">Research</p>
+    <h2 class="sec-title">How wrong is a fast surrogate allowed to be?</h2>
+    <p class="sec-lede">A physics-informed surrogate is easy to demonstrate and hard to qualify. This study
+    answers the two questions that decide whether one is usable: how much of the reported accuracy
+    survives a change of random seed, and how large an error allowance a decision rule needs to stay safe.</p>
+
+    <div class="feature">
+      <div class="feature-head">
+        <h3>Seed variability and calibrated error bounds for physics-informed conjugate heat transfer surrogates</h3>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <a class="btn btn-ghost" href="https://doi.org/10.5281/zenodo.21788995">Preprint</a>
+          <a class="btn btn-ghost" href="https://github.com/hassaanshahid97-cyber/scramjet-pinn-surrogate">Code</a>
+        </div>
+      </div>
+      <p style="color:var(--ink-2);margin:0">Sole-authored, written and executed independently over one
+      summer. Submitted to a peer-reviewed journal in August 2026, not yet reviewed. Code, data, figures
+      and an audit script released under MIT; the manuscript under CC BY 4.0. The whole study reproduces
+      from a clean checkout in under two core-hours.</p>
+
+      <div class="findings">
+        <div class="finding"><b>Finding 1</b><p>The physics residual <b>substitutes for reference data</b>.
+          Given four CHT solutions it improves stress error 3.5 times, and with none at all it still beats
+          a supervised model given four.</p></div>
+        <div class="finding"><b>Finding 2</b><p>It <b>collapses run-to-run variance</b>, seed standard
+          deviation of field RMSE from 12.42 K to 0.27 K. A single-seed study cannot see this.</p></div>
+        <div class="finding"><b>Finding 3</b><p>An <b>accurate surrogate is not a safe one</b>. As a hard
+          constraint it broke the structural limit on 14.4 per cent of manoeuvres; a split-conformal
+          allowance restored the nominal 5 per cent.</p></div>
+        <div class="finding neg"><b>Where it loses</b><p>Reported because it is what the experiment shows:
+          given 24 reference solutions, a plain supervised model was twice as accurate in-envelope.</p></div>
+      </div>
+
+      <div class="figrow">
+        <figure class="fig" data-full="figures/surrogates/fig_verification.png" data-cap="Method of manufactured solutions: observed order 2.00 in space, 0.95 in time. The solver is verified before a single surrogate is trained.">
+          <img src="figures/surrogates/fig_verification.png" alt="Manufactured solution convergence showing observed order of accuracy" loading="lazy">
+          <figcaption><b>Verification first.</b> Observed order 2.00 spatial, and agreement to 7.3e-10 K against an exact Kirchhoff solution.</figcaption>
+        </figure>
+        <figure class="fig" data-full="figures/surrogates/fig_seeds.png" data-cap="Seed-to-seed variability of field error across twelve replicated runs at matched architecture and optimiser budget.">
+          <img src="figures/surrogates/fig_seeds.png" alt="Seed to seed variability across replicated runs" loading="lazy">
+          <figcaption><b>Variance, not the best run.</b> Twelve runs, four configurations, three seeds each, matched budget.</figcaption>
+        </figure>
+        <figure class="fig" data-full="figures/surrogates/fig_allowance.png" data-cap="Margin residuals and measured closed-loop violation rate under each error allowance.">
+          <img src="figures/surrogates/fig_allowance.png" alt="Split conformal allowance and violation rates" loading="lazy">
+          <figcaption><b>Calibrated in closed loop.</b> Violation rate measured with the surrogate driving the decision, not assumed.</figcaption>
+        </figure>
+      </div>
     </div>
+  </div>
+</section>
+
+<!-- ============================ WORK ============================ -->
+<section id="work">
+  <div class="wrap">
+    <p class="eyebrow">Selected work</p>
+    <h2 class="sec-title">Fifteen projects, and what came out of each</h2>
+    <p class="sec-lede">Filter by discipline. Open a card for the method, the numbers and the figures.
+    Every project links to a full case study with setup, verification, results and limitations.</p>
+
+    <div class="filters" id="filters" role="group" aria-label="Filter projects by discipline"></div>
+    <div class="grid" id="grid"></div>
+
+    <p style="margin-top:26px;color:var(--ink-3);font-size:14.4px">
+      Full written case studies, with method and limitations:
+      <a href="https://github.com/hassaanshahid97-cyber/engineering-portfolio">engineering-portfolio</a>
+    </p>
+  </div>
+</section>
+
+<!-- ============================ THESIS ============================ -->
+<section id="thesis">
+  <div class="wrap">
+    <p class="eyebrow">Master thesis, 30 hp</p>
+    <h2 class="sec-title">January to June 2027. Here is where I would fit.</h2>
+    <p class="sec-lede">Each direction states what I have already done and what I would have to ramp up in
+    the first weeks. No direction claims readiness I cannot evidence.</p>
+
+    <dl class="facts">
+      <div><dt>Period</dt><dd>Jan to Jun 2027, full time, 20 weeks</dd></div>
+      <div><dt>Location</dt><dd>Linköping, mobile across Sweden and Denmark</dd></div>
+      <div><dt>Language</dt><dd>English C1, IELTS 7.5. Swedish A2, studying SFI</dd></div>
+      <div><dt>Confidentiality</dt><dd>Willing to work under NDA, redacted thesis if required</dd></div>
+    </dl>
+
+    <div class="th-grid">
+      <article class="th reveal">
+        <span class="num">Direction 01</span>
+        <h3>Scientific ML for physics-informed inverse problems</h3>
+        <p style="color:var(--ink-2);font-size:14.4px;margin:0">SAR imaging, electromagnetic scattering, non-destructive evaluation, any ill-posed reconstruction with a PDE forward model.</p>
+        <dl>
+          <dt class="ready">Already done</dt>
+          <dd>Verified forward model, JAX surrogate with hard-constrained initial conditions and no loss-weight tuning, twelve replicated runs, split-conformal bound validated in closed loop.</dd>
+          <dt class="ramp">Would ramp up</dt>
+          <dd>Electromagnetic scattering formulations and the SAR chain, regularisation theory beyond the CHT setting, GPU kernel programming.</dd>
+        </dl>
+      </article>
+      <article class="th reveal">
+        <span class="num">Direction 02</span>
+        <h3>Surrogates and UQ for propulsion and thermal limits</h3>
+        <p style="color:var(--ink-2);font-size:14.4px;margin:0">Real-time limit protection, digital twins of hot structures, life usage monitoring, fast models inside a control loop.</p>
+        <dl>
+          <dt class="ready">Already done</dt>
+          <dd>The preprint is this problem in miniature. Plus a Brayton cycle tool with compressor and turbine maps benchmarked against AMT Olympus HP 230N test data.</dd>
+          <dt class="ramp">Would ramp up</dt>
+          <dd>Industrial life and damage models; real-time and embedded deployment constraints beyond rig experience.</dd>
+        </dl>
+      </article>
+      <article class="th reveal">
+        <span class="num">Direction 03</span>
+        <h3>Machine learning applied to CFD</h3>
+        <p style="color:var(--ink-2);font-size:14.4px;margin:0">Reduced order models, data-driven turbulence closure augmentation, surrogate-assisted shape optimisation.</p>
+        <dl>
+          <dt class="ready">Already done</dt>
+          <dd>Steady RANS at Re 588,000 on a 3.2M element mesh at y+ &lt; 5, with model comparison and convergence studies, and the ML half from the preprint.</dd>
+          <dt class="ramp">Would ramp up</dt>
+          <dd>Large CFD training data pipelines; adjoint methods, understood in principle but not implemented.</dd>
+        </dl>
+      </article>
+      <article class="th reveal">
+        <span class="num">Direction 04</span>
+        <h3>Simulation, model validation and flight test</h3>
+        <p style="color:var(--ink-2);font-size:14.4px;margin:0">Hardware- and software-in-the-loop, model validation against rig or flight data, autonomy validation before flight test.</p>
+        <dl>
+          <dt class="ready">Already done</dt>
+          <dd>Built the rig: Pixhawk 6X and ArduPlane closed onto X-Plane over MAVLink, measured actuator latency reconciled against Simulink, derivatives validated under gust. EASA UAS licence.</dd>
+          <dt class="ramp">Would ramp up</dt>
+          <dd>Certification-grade process, DO-178C style software assurance, formal requirements management.</dd>
+        </dl>
+      </article>
+    </div>
+
+    <div class="feature" style="margin-top:20px;border-left:3px solid var(--warn)">
+      <h3 style="font-size:18px;margin-bottom:12px">What I am not claiming</h3>
+      <p style="margin:0;color:var(--ink-2);font-size:14.8px">I have not worked with SAR data or
+      electromagnetic solvers, have not written GPU kernels or run on an HPC cluster, my C++ is working
+      knowledge rather than production, I have not worked inside a certified aerospace software process,
+      and my finite element work is coursework level while my finite volume work is not. Everything I do
+      claim links to code, a manuscript, a report or a flying aircraft.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ EXPERIENCE ============================ -->
+<section id="experience">
+  <div class="wrap">
+    <p class="eyebrow">Experience and education</p>
+    <h2 class="sec-title">Where I have engineered</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:clamp(22px,4vw,48px)">
+      <div class="tl">
+        <div class="tl-item"><div class="tl-when">Dec 2025 to present</div>
+          <div class="tl-what">Team Captain and Lead Systems Engineer</div>
+          <div class="tl-where">Team Findus, SAE BRASIL AeroDesign, Linköping University</div>
+          <div class="tl-note">Leads a multidisciplinary team building a heavy-lift electric UAV. Coordinates controls, aerodynamics and structures interfaces, compiled the competition technical report.</div></div>
+        <div class="tl-item"><div class="tl-when">Jun 2024 to Aug 2024</div>
+          <div class="tl-what">Design Engineer, Simulation and Test</div>
+          <div class="tl-where">NaqCoDE Technologies, Islamabad</div>
+          <div class="tl-note">Built a real-time hardware-in-the-loop and Iron Bird framework for validating autonomous UAV flight control.</div></div>
+        <div class="tl-item"><div class="tl-when">Sep 2024 to Jun 2025</div>
+          <div class="tl-what">Teaching and Research Assistant</div>
+          <div class="tl-where">Control Systems and Fluid Mechanics, Institute of Space Technology</div>
+          <div class="tl-note">Ran undergraduate laboratory sessions over two semesters, test and simulation data analysis, MATLAB and Simulink modelling.</div></div>
+        <div class="tl-item"><div class="tl-when">Jan 2023 to present</div>
+          <div class="tl-what">Physics and Engineering Tutor</div>
+          <div class="tl-where">Preply, remote</div>
+          <div class="tl-note">Physics and applied physics from O-level to first year university, plus introductory FEA and CFD. Learner rating 5.0 of 5.0.</div></div>
+        <div class="tl-item"><div class="tl-when">Jul 2023 to Sep 2025</div>
+          <div class="tl-what">Technical Team Engineer, UAV and Drone Systems</div>
+          <div class="tl-where">AIAA Student Chapter, Institute of Space Technology</div>
+          <div class="tl-note">Designed, built and flight tested fixed-wing UAVs for two national competitions. Organised AVIATE'24, including rules, scrutineering and flight safety procedure.</div></div>
+      </div>
+      <div class="tl">
+        <div class="tl-item edu"><div class="tl-when">Aug 2025 to Jun 2027</div>
+          <div class="tl-what">M.Sc. Aeronautical Engineering, 120 ECTS</div>
+          <div class="tl-where">Linköping University, Sweden</div>
+          <div class="tl-note">Average grade 4.25 of 5.0 across 54 ECTS completed. Grade 5 in Aerodynamics, Flight Mechanics, Engineering Systems Design and Aircraft Systems. 2026/27: Machine Learning for Mechanical Engineering, CFD, Gas Turbine Engines, Aircraft Systems Engineering Project, Model-based System-of-Systems Engineering, Prototype Realization.</div></div>
+        <div class="tl-item edu"><div class="tl-when">Sep 2021 to Jul 2025</div>
+          <div class="tl-what">B.Sc. Aerospace Engineering, 240 ECTS</div>
+          <div class="tl-where">Institute of Space Technology, Pakistan</div>
+          <div class="tl-note">CGPA 3.38 of 4.0. Numerical analysis, differential equations, linear algebra, control systems, flight control systems, spacecraft dynamics and control, rotorcraft dynamics, flight dynamics and stability, aerospace vehicle design.</div></div>
+        <div class="tl-item edu"><div class="tl-when">Sep 2024 to Jul 2025</div>
+          <div class="tl-what">Degree project, nominated Best Final Year Project</div>
+          <div class="tl-where">Micro gas turbine design and performance code</div>
+          <div class="tl-note">Supervised by Dr M. Naeem, PhD Cranfield. Archived at doi.org/10.5281/zenodo.21805835.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ SKILLS ============================ -->
+<section id="skills">
+  <div class="wrap">
+    <p class="eyebrow">Capability</p>
+    <h2 class="sec-title">Toolkit, at honest depth</h2>
+    <p class="sec-lede"><b>Used in anger</b> means it carried a deliverable. <b>Working</b> means one
+    project or under supervision. <b>Aware</b> means I can read it and would need a ramp-up.</p>
+    <div class="skills" id="skills-grid"></div>
+  </div>
+</section>
+
+<!-- ============================ CREDENTIALS ============================ -->
+<section id="credentials">
+  <div class="wrap">
+    <p class="eyebrow">Record</p>
+    <h2 class="sec-title">Credentials, competitions and publications</h2>
+    <div class="creds">
+      <div class="cred"><h4>Publications and archives</h4><ul>
+        <li>Shahid, H. (2026). Seed variability and calibrated error bounds for physics-informed conjugate heat transfer surrogates. <a href="https://doi.org/10.5281/zenodo.21788995">Zenodo</a>. Sole-authored, submitted Aug 2026.</li>
+        <li>Shahid, H. and Sabir, M. B. (2025). Micro gas turbine design and performance code. <a href="https://doi.org/10.5281/zenodo.21805835">Zenodo</a>.</li>
+        <li>ORCID <a href="https://orcid.org/0009-0003-7403-8933">0009-0003-7403-8933</a></li></ul></div>
+      <div class="cred"><h4>Competitions</h4><ul>
+        <li>Winner, National Design-Build-Fly Competition, 2023 and 2024</li>
+        <li>Runner-up, UCP Taakra AeroDesign Competition, 2023</li>
+        <li>Nominated, Best Final Year Project 2025, IST</li>
+        <li>Team Captain, SAE BRASIL AeroDesign 2026 Advanced Class</li></ul></div>
+      <div class="cred"><h4>Licences and registration</h4><ul>
+        <li>EASA UAS A1/A3 Open Subcategory remote pilot, valid to 2031</li>
+        <li>Certified Engineer Aerospace, Sveriges Ingenjörer, SeQF level 6</li>
+        <li>Registered aeronautical engineer, Pakistan Engineering Council</li>
+        <li>Member, Royal Aeronautical Society and AIAA</li></ul></div>
+      <div class="cred"><h4>Certifications and languages</h4><ul>
+        <li>Certified SOLIDWORKS Associate: Design (CSWA), xDesign, Additive Manufacturing and Sustainability</li>
+        <li>English fluent, IELTS 7.5, CEFR C1</li>
+        <li>Swedish A2, studying SFI at Linköping kommun</li>
+        <li>Urdu and Punjabi mother tongue</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ CONTACT ============================ -->
+<section id="contact">
+  <div class="wrap">
+    <div class="contact">
+      <h2>Looking for a thesis student from January 2027?</h2>
+      <p>If the problem you have in mind involves a physics model, a surrogate and a decision that has to
+      be trusted, I would like to hear about it. Happy to send the CV, transcripts or the preprint, or to
+      talk it through on a call.</p>
+      <div class="cta" style="justify-content:center">
+        <a class="btn btn-primary" href="mailto:hassaanshahid97@gmail.com">hassaanshahid97@gmail.com</a>
+        <a class="btn btn-ghost" href="https://www.linkedin.com/in/hassaan-shahid-b1b285280">LinkedIn</a>
+        <a class="btn btn-ghost" href="https://github.com/hassaanshahid97-cyber/engineering-portfolio">Full portfolio</a>
+      </div>
+      <p style="font-size:13.6px;color:var(--ink-3);margin-bottom:0">Linköping, Sweden · +46 768 902 862 ·
+      academic references from Linköping University and IST available on request</p>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer><div class="wrap foot">
+  <span>© <span id="yr"></span> Hassaan Shahid. Built by hand, no framework.</span>
+  <span>Every number on this page comes from my own reports, code and repositories.</span>
+</div></footer>
+
+<div class="modal" id="modal" hidden role="dialog" aria-modal="true" aria-labelledby="sheet-title">
+  <div class="backdrop" data-close></div>
+  <div class="sheet">
+    <div class="sheet-head">
+      <h3 id="sheet-title"></h3>
+      <button class="iconbtn" data-close aria-label="Close">✕</button>
+    </div>
+    <div class="sheet-body" id="sheet-body"></div>
   </div>
 </div>
 
-<!-- ══════════ RESEARCH ══════════ -->
-<section id="research">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <div class="sec-tag">01 / Research</div>
-      <h2>How wrong is a fast surrogate allowed to be?</h2>
-      <p>Sole-authored work on physics-informed surrogate models for nonlinear transient conjugate heat transfer —
-         and on the two questions that decide whether such a model is usable rather than merely demonstrable.</p>
-    </div>
-
-    <div class="paper reveal">
-      <div class="paper-badges">
-        <span class="pb live"><span class="pulse" style="width:6px;height:6px"></span> Under editorial review</span>
-        <a class="pb doi" href="https://doi.org/10.5281/zenodo.21788995" target="_blank" rel="noopener">DOI 10.5281/zenodo.21788995 ↗</a>
-        <a class="pb" href="https://github.com/hassaanshahid97-cyber/scramjet-pinn-surrogate" target="_blank" rel="noopener">Code &amp; data ↗</a>
-        <span class="pb audit">✓ 104/104 claims audited</span>
-        <span class="pb">MIT · CC BY 4.0</span>
-        <span class="pb">Reproduces in 2 core-hours</span>
-      </div>
-      <h3>Seed variability and calibrated error bounds for physics-informed conjugate heat transfer surrogates</h3>
-      <div class="venue">Hassaan Shahid · <b>sole author</b> · submitted to <b>Heat Transfer Engineering</b> (Taylor &amp; Francis), August 2026 · Preprint archived on Zenodo</div>
-      <p class="abs">
-        Physics-informed neural networks are routinely proposed as fast surrogates for heat transfer problems too
-        expensive to solve inside a design or control loop. Two questions about them are rarely answered.
-        This paper answers both on a <strong>verified</strong> reference problem, and publishes every number,
-        every script, and an audit that re-checks the manuscript against the stored results.
-      </p>
-      <div class="qgrid">
-        <div class="q"><div class="num">QUESTION 01</div><p>How much of the reported accuracy survives a change of random seed?</p></div>
-        <div class="q"><div class="num">QUESTION 02</div><p>How large an error allowance does a downstream decision rule need to stay safe?</p></div>
-      </div>
-    </div>
-
-    <div class="tabs reveal" role="tablist">
-      <button class="tab on" data-tab="verify" role="tab">Verification first</button>
-      <button class="tab" data-tab="results" role="tab">The variance result</button>
-      <button class="tab" data-tab="safety" role="tab">Accuracy ≠ safety</button>
-      <button class="tab" data-tab="method" role="tab">Method &amp; reproducibility</button>
-      <button class="tab" data-tab="honest" role="tab">Where it loses</button>
-    </div>
-
-    <!-- VERIFY -->
-    <div class="panel on" id="p-verify">
-      <div class="panel-inner reveal">
-        <h4>The solver is verified before a single surrogate is trained</h4>
-        <p>If this step failed, nothing downstream would be interpretable — surrogate error could not be
-           separated from discretisation error. Two independent checks, both passing.</p>
-        <div class="metrics">
-          <div class="metric"><div class="m">7.3 × 10⁻¹⁰ K</div><div class="c">Max-norm agreement with a closed-form nonlinear steady solution (Kirchhoff transform) — machine precision</div></div>
-          <div class="metric"><div class="m">2.00</div><div class="c">Observed spatial order from the method of manufactured solutions (design order 2)</div></div>
-          <div class="metric"><div class="m">0.95</div><div class="c">Observed temporal order, backward Euler (design order 1)</div></div>
-          <div class="metric"><div class="m">0.017 K</div><div class="c">Grid-independence deviation at production resolution; 0.001 % on peak stress</div></div>
-        </div>
-        <p class="note">
-          <strong style="color:var(--text)">Why machine precision, not truncation error?</strong> For a linear <em>k</em>(<em>T</em>),
-          the arithmetic-mean face conductivity reproduces ∫<em>k</em> d<em>T</em> exactly, so the scheme carries no
-          linearisation error in the diffusive flux. Backward Euler was chosen over Crank–Nicolson deliberately —
-          it is L-stable and does not oscillate on the sharp boundary-data transient. For a verification reference,
-          that robustness is worth more than formal order when the time step is cheap.
-          Discretisation error sits two to three orders of magnitude below surrogate error, so it cannot contaminate
-          any comparison that follows.
-        </p>
-      </div>
-    </div>
-
-    <!-- RESULTS -->
-    <div class="panel" id="p-results">
-      <div class="panel-inner reveal">
-        <h4>The physics residual substitutes for data — and collapses run-to-run variance</h4>
-        <p>Four configurations, <strong style="color:var(--text)">identical architecture</strong> (7 345 parameters) and
-           <strong style="color:var(--text)">identical optimiser budget</strong> (1 500 Adam + 300 L-BFGS), each trained
-           from three random seeds. Any difference is attributable to loss composition and the number of reference
-           solutions supplied — and to nothing else.</p>
-
-        <div class="tbl-wrap">
-          <table>
-            <thead><tr>
-              <th>Configuration</th><th>CHT solutions</th><th>Residual</th>
-              <th>In-env. RMSE [K]</th><th>In-env. stress err [%]</th><th>Out-of-env. stress [%]</th>
-            </tr></thead>
-            <tbody>
-              <tr><td>Data (4)</td><td class="n">4</td><td class="tag-no">no</td><td class="n">41.26 ± 12.42</td><td class="n">10.47 ± 0.63</td><td class="n">26.62 ± 3.53</td></tr>
-              <tr><td>Data (24)</td><td class="n">24</td><td class="tag-no">no</td><td class="n best">6.70 ± 0.28</td><td class="n best">2.05 ± 0.50</td><td class="n">9.26 ± 0.33</td></tr>
-              <tr><td>PINN (0)</td><td class="n">0</td><td class="tag-yes">yes</td><td class="n">15.94 ± 1.43</td><td class="n">3.75 ± 1.40</td><td class="n">7.70 ± 0.86</td></tr>
-              <tr><td>Hybrid (4)</td><td class="n">4</td><td class="tag-yes">yes</td><td class="n">13.59 ± 0.27</td><td class="n">3.02 ± 0.66</td><td class="n best">7.61 ± 1.16</td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <h4 style="margin-top:30px">Seed-to-seed spread of the field error</h4>
-        <p>This is the result a single-seed study cannot see. The mean improves by a factor of about three;
-           the <strong style="color:var(--text)">spread across seeds improves by a factor of 45</strong>, at
-           identical data, architecture and budget.</p>
-        <div class="chart" data-chart>
-          <div class="bar-row">
-            <div class="lbl">Data (4) — no residual</div>
-            <div class="bar-track"><div class="bar-fill bad" data-w="100"></div></div>
-            <div class="val">12.42 K <small>s.d.</small></div>
-          </div>
-          <div class="bar-row">
-            <div class="lbl">Hybrid (4) — + residual</div>
-            <div class="bar-track"><div class="bar-fill good" data-w="2.2"></div></div>
-            <div class="val">0.27 K <small>s.d.</small></div>
-          </div>
-        </div>
-        <p class="note">
-          The supervised model drives its training loss to 1.1 × 10⁻⁵, fitting its four points essentially perfectly.
-          Where it lands <em>between</em> those points still depends strongly on initialisation — the residual removes
-          that freedom. For an engineering deployment this may matter more than the mean: a surrogate whose accuracy
-          depends on the random seed is hard to qualify, because the artefact you verified is not obviously the
-          artefact you will use.
-        </p>
-      </div>
-    </div>
-
-    <!-- SAFETY -->
-    <div class="panel" id="p-safety">
-      <div class="panel-inner reveal">
-        <h4>An accurate surrogate is not automatically a safe one</h4>
-        <p>The surrogate was used as a <strong style="color:var(--text)">hard inequality constraint</strong> in a coolant
-           scheduler, across four independently trained models. An optimiser does not evaluate the model at a random
-           point — it evaluates it wherever the constraint looks most nearly satisfied, so any optimism there is
-           spent immediately.</p>
-
-        <div class="chart" data-chart>
-          <div class="bar-row">
-            <div class="lbl">No error allowance (δ = 0)</div>
-            <div class="bar-track"><div class="bar-fill bad" data-w="100"></div></div>
-            <div class="val">14.4 %</div>
-          </div>
-          <div class="bar-row">
-            <div class="lbl">Split-conformal, marginal</div>
-            <div class="bar-track"><div class="bar-fill good" data-w="40.3"></div></div>
-            <div class="val">5.8 %</div>
-          </div>
-          <div class="bar-row">
-            <div class="lbl">Split-conformal, boundary</div>
-            <div class="bar-track"><div class="bar-fill bad" data-w="91.7"></div></div>
-            <div class="val">13.2 %</div>
-          </div>
-        </div>
-        <div class="nominal-line"><i></i> Nominal target rate: 5 % — only the marginal calibration recovers it</div>
-
-        <div class="metrics" style="margin-top:26px">
-          <div class="metric"><div class="m">−0.03 → −0.09</div><div class="c">Mean margin residuals — conservative in sign, yet the scheduler still violates</div></div>
-          <div class="metric"><div class="m">0.73 → 1.93</div><div class="c">Residual distribution maxima — a long right tail is what the optimiser finds</div></div>
-          <div class="metric"><div class="m">15 ×</div><div class="c">Spread in calibrated δ (0.0096 → 0.1413) across surrogates of identical architecture</div></div>
-          <div class="metric"><div class="m">1 in 8</div><div class="c">Manoeuvres reclassified infeasible — the price of the calibrated allowance</div></div>
-        </div>
-
-        <p class="note">
-          <strong style="color:var(--text)">The obvious refinement does not work.</strong> Calibrating only near the
-          constraint boundary — where the optimiser actually selects — sounds strictly better. It gives 13.2 %,
-          statistically indistinguishable from no allowance at all. Two effects combine: the band holds only 26–27 of
-          120 calibration points, so at α = 0.05 the conformal rank is ⌈28 × 0.95⌉ = 27 and δ becomes the
-          <em>maximum</em> of a small sample; and a band in predicted margin is not the selection distribution the
-          optimiser induces. Conditioning on the wrong variable discards most of the sample without correcting the
-          bias it was meant to correct. This negative result is recorded because it is the natural first thing to try.
-        </p>
-      </div>
-    </div>
-
-    <!-- METHOD -->
-    <div class="panel" id="p-method">
-      <div class="panel-inner reveal">
-        <h4>Everything reproduces in under two core-hours. No GPU.</h4>
-        <p>The order matters: the solver is verified before a single surrogate is trained, and an audit script
-           re-checks the finished manuscript against the stored JSON at the end.</p>
-
-        <div class="pipe">
-          <div class="pipe-step"><div class="s">01</div><div class="t">Reference solver</div><div class="d">Vertex-centred finite volume, backward Euler, Picard linearisation, temperature-dependent k &amp; cₚ</div></div>
-          <div class="pipe-step verify"><div class="s">02 · GATE</div><div class="t">Verification</div><div class="d">Kirchhoff exact solution + method of manufactured solutions in space and time</div></div>
-          <div class="pipe-step"><div class="s">03</div><div class="t">Design of experiments</div><div class="d">Latin hypercube over peak heat flux and film coefficient; 24 train, 40 in-envelope, 20 out</div></div>
-          <div class="pipe-step"><div class="s">04</div><div class="t">Training</div><div class="d">4 configurations × 3 seeds = 12 runs in JAX; hard initial condition; no loss weight tuned</div></div>
-          <div class="pipe-step verify"><div class="s">05 · GATE</div><div class="t">Claim audit</div><div class="d">104 quantitative claims re-verified against stored results — currently 104/104</div></div>
-        </div>
-
-        <div class="metrics" style="margin-top:26px">
-          <div class="metric"><div class="m">2.24 ms</div><div class="c">Single surrogate query returning the full transient on a 41 × 31 grid</div></div>
-          <div class="metric"><div class="m">28 ×</div><div class="c">Speedup on the 64-candidate scheduler workload (100 ms vs 2 794 ms)</div></div>
-          <div class="metric"><div class="m">7 345</div><div class="c">Network parameters — evaluation cost set by the network, not the model it replaces</div></div>
-          <div class="metric"><div class="m">1.7 × 10⁻¹⁰ K</div><div class="c">Initial-condition residual — satisfied exactly by construction, not by penalty</div></div>
-        </div>
-
-        <p class="note">
-          <strong style="color:var(--text)">Stated carefully:</strong> 28× is <em>modest</em>, and modest for a good
-          reason — the reference problem is a tridiagonal solve, about the cheapest transient PDE solve there is.
-          What the demonstration establishes is the structural property the large speedups rest on: the same
-          7 345-parameter network would cost the same 2.24 ms whether trained against this solver or against a
-          three-dimensional computation costing hours. <strong style="color:var(--text)">No loss weight was tuned at
-          any point in this study</strong> — all residuals are non-dimensionalised to order unity, which takes the
-          hyperparameter out of the problem rather than scheduling it.
-        </p>
-      </div>
-    </div>
-
-    <!-- HONEST -->
-    <div class="panel" id="p-honest">
-      <div class="panel-inner reveal">
-        <h4>Where the method loses — reported because it is what the experiment shows</h4>
-        <div class="honest">
-          <h5>⚠ The negative result</h5>
-          <p>With <strong>24 reference solutions over two parameters, a plain supervised model was twice as accurate
-             in-envelope</strong> (6.70 K vs 13.59 K). The residual loss contains second derivatives of the network
-             with respect to its inputs and is a substantially stiffer objective: it plateaus near 1.8 × 10⁻³ while
-             the supervised runs reach about 2 × 10⁻⁵ at the shared budget. A dense design over two parameters also
-             leaves little estimation error for a physics prior to remove.</p>
-        </div>
-        <p class="note" style="border-top:0;padding-top:18px">
-          I expect the balance to shift as parameter dimension grows, since design count for a fixed fill distance
-          grows with dimension while Monte Carlo collocation does not — but <strong style="color:var(--text)">that is
-          an expectation, not a result of this work</strong>, and it is labelled as such in the manuscript.
-          <br><br>
-          <strong style="color:var(--text)">Scope, stated plainly:</strong> one-dimensional conduction; coolant
-          represented by a lumped film coefficient. No turbulence, no real-fluid properties, no heat transfer
-          deterioration, no coking, no roughness, no channel-to-land lateral conduction. The surrogate is parametric,
-          not an operator — it is conditioned on a fixed initial thermal state and cannot support receding-horizon
-          re-planning. The contribution is methodological, demonstrated on a problem for which a verified reference
-          is available.
-        </p>
-      </div>
-    </div>
-
-    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:30px" class="reveal">
-      <a href="https://doi.org/10.5281/zenodo.21788995" target="_blank" rel="noopener" class="btn btn-primary">Read the preprint &rarr;</a>
-      <a href="https://github.com/hassaanshahid97-cyber/scramjet-pinn-surrogate" target="_blank" rel="noopener" class="btn btn-ghost">Browse the code</a>
-      <a href="https://github.com/hassaanshahid97-cyber/scramjet-pinn-surrogate/blob/main/notebooks/reproduce_figures.ipynb" target="_blank" rel="noopener" class="btn btn-ghost">Reproduce the figures in a browser</a>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════ ABOUT ══════════ -->
-<section id="about">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <div class="sec-tag">02 / About</div>
-      <h2>At the intersection of simulation and the flight line</h2>
-    </div>
-    <div class="about-grid">
-      <div class="about-text reveal">
-        <p>Aerospace engineer with hands-on experience in <strong>UAV systems engineering, autonomous flight control
-           and propulsion performance</strong> — currently reading for an MSc in Aeronautical Engineering at
-           Linköping University, specialising in flight control systems and autonomous aerial vehicles.</p>
-        <p>My work sits where modelling meets the flight line. I design, model and validate aerial platforms in
-           <strong>MATLAB/Simulink, ANSYS and CATIA V5</strong>, and prove them out through rigorous
-           <strong>SIL/HIL pipelines</strong> before they ever leave the ground. I have built and flown fixed-wing
-           UAVs, led multidisciplinary competition teams to three national podiums, and founded an aerospace
-           start-up focused on propulsion-integrated UAV systems.</p>
-        <p>Alongside the hardware I do <strong>published research on model trustworthiness</strong> — specifically,
-           on what has to be true before a fast surrogate model is allowed to sit inside a control or design loop.
-           That work is sole-authored, fully open, and every quantitative claim in it is re-verified by an audit
-           script against stored results.</p>
-        <p>I am open to entry- to mid-level roles in <strong>aeronautical engineering, UAV systems engineering,
-           flight control or systems integration</strong> — based in Linköping and open to hybrid and on-site
-           opportunities across Europe. No visa sponsorship required until August 2028.</p>
-      </div>
-      <div class="hl-card reveal">
-        <h4>What I bring to a team</h4>
-        <ul>
-          <li><span class="arr">&rarr;</span> End-to-end UAV development: concept → CAD → CFD → fabrication → flight test</li>
-          <li><span class="arr">&rarr;</span> Flight control: PID/LQR design, state-space modelling, ArduPilot, Pixhawk 6X</li>
-          <li><span class="arr">&rarr;</span> Simulation: SIL/HIL and iron-bird testbed design and validation</li>
-          <li><span class="arr">&rarr;</span> Verification discipline: MMS, exact solutions, grid independence, claim audits</li>
-          <li><span class="arr">&rarr;</span> Composite airframe manufacturing and propulsion optimisation</li>
-          <li><span class="arr">&rarr;</span> Leadership of cross-functional, time-critical engineering teams</li>
-          <li><span class="arr">&rarr;</span> Willingness to publish results that <em>don't</em> favour the method</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════ EXPERIENCE ══════════ -->
-<section id="experience">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <div class="sec-tag">03 / Experience</div>
-      <h2>Where I've engineered</h2>
-    </div>
-    <div class="timeline" id="timeline"></div>
-  </div>
-</section>
-
-<!-- ══════════ PROJECTS ══════════ -->
-<section id="projects">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <div class="sec-tag">04 / Projects</div>
-      <h2>Selected engineering work</h2>
-      <p>From micro gas-turbine performance codes to flown fixed-wing UAVs and CFD shock analysis.</p>
-    </div>
-    <div class="filters reveal" id="proj-filters"></div>
-    <div class="proj-grid" id="projects-grid"></div>
-  </div>
-</section>
-
-<!-- ══════════ GALLERY ══════════ -->
-<section id="gallery">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <div class="sec-tag">05 / Flight hardware</div>
-      <h2>From CAD to the flight line</h2>
-      <p>Aircraft I've designed, built, simulated and flown. Click any image to enlarge.</p>
-    </div>
-    <div class="gal-grid" id="gallery-grid"></div>
-  </div>
-</section>
-
-<!-- ══════════ EDUCATION ══════════ -->
-<section id="education">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <div class="sec-tag">06 / Education</div>
-      <h2>Academic background</h2>
-    </div>
-    <div class="edu-grid" id="edu-grid"></div>
-  </div>
-</section>
-
-<!-- ══════════ AWARDS ══════════ -->
-<section id="awards">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <div class="sec-tag">07 / Honours &amp; awards</div>
-      <h2>Competition track record</h2>
-    </div>
-    <div class="award-grid" id="award-grid"></div>
-  </div>
-</section>
-
-<!-- ══════════ SKILLS ══════════ -->
-<section id="skills">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <div class="sec-tag">08 / Skills</div>
-      <h2>Technical toolkit</h2>
-      <p>Depth indicated by daily working proficiency, not by years listed on a CV.</p>
-    </div>
-    <div class="skill-cats" id="skill-cats"></div>
-  </div>
-</section>
-
-<!-- ══════════ CERTS ══════════ -->
-<section id="certs">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <div class="sec-tag">09 / Certifications</div>
-      <h2>Licences &amp; credentials</h2>
-    </div>
-    <div class="cert-grid" id="cert-grid"></div>
-  </div>
-</section>
-
-<!-- ══════════ CONTACT ══════════ -->
-<section class="contact" id="contact">
-  <div class="wrap reveal">
-    <span class="open-tag"><span class="pulse"></span> Available for opportunities across Europe</span>
-    <h2>Let's build something that <span class="grad">flies.</span></h2>
-    <p>Open to roles in aeronautical engineering, UAV systems, flight control and systems integration —
-       and to research collaborations on model verification and trustworthy surrogates.</p>
-    <div class="contact-links">
-      <button class="btn btn-primary" id="copyEmail" data-mail="hassaanshahid97@gmail.com">&#9993; hassaanshahid97@gmail.com</button>
-      <a href="https://www.linkedin.com/in/hassaan-shahid-b1b285280" target="_blank" rel="noopener" class="btn btn-ghost">in / LinkedIn</a>
-      <a href="https://github.com/hassaanshahid97-cyber" target="_blank" rel="noopener" class="btn btn-ghost">GitHub</a>
-      <a href="https://orcid.org/0009-0003-7403-8933" target="_blank" rel="noopener" class="btn btn-ghost">ORCID</a>
-      <a href="tel:+46768902862" class="btn btn-ghost">+46 768 902 862</a>
-    </div>
-    <p style="font-size:.82rem;color:var(--faint);margin-top:4px">Academic: ddssh446@student.liu.se · ORCID 0009-0003-7403-8933</p>
-  </div>
-</section>
-
-<footer>
-  <div class="wrap">
-    <span class="mono">Hassaan Shahid</span> — Aerospace Engineer &amp; Researcher · Linköping, Sweden<br>
-    Single self-contained page · press <span class="mono">⌘K</span> to search · &copy; <span id="yr"></span>
-  </div>
-</footer>
+<div class="lightbox" id="lightbox" hidden><div><img id="lb-img" alt=""><p id="lb-cap"></p></div></div>
 
 <script>
-/* ════════════════════════════════════════════════════════════════════════
-   ██  IMAGE DATA — PASTE FROM YOUR OLD index.html  ██
-   ────────────────────────────────────────────────────────────────────────
-   Open your current index.html, find these three lines near the top of the
-   <script> block, and paste them over the three empty ones below:
+/* ============================ data ============================ */
+const REPO='https://github.com/hassaanshahid97-cyber/engineering-portfolio/blob/main/projects/';
+const CATS=[['all','All'],['sciml','Scientific ML'],['cfd','CFD &amp; aero'],['design','Aircraft design'],
+            ['automation','Design automation'],['flight','Flight systems'],['built','Built &amp; flown']];
 
-       const PHOTO = "data:image/jpeg;base64,....";
-       const IMGX  = {"banner": "...", "award_ndbfc18": "...", ...};
-       const LOGOS = {"cover": "...", "co::Linköping University": "...", ...};
+const P=[
+{id:'physics-informed-surrogates',cat:'sciml',title:'Physics-informed surrogates with calibrated error bounds',
+ when:'Jun to Aug 2026 · sole-authored preprint',img:'figures/surrogates/hero.png',contain:true,
+ blurb:'A verified finite volume solver, four JAX surrogate configurations over three seeds each, and a split-conformal allowance validated inside a coolant scheduler.',
+ tags:['JAX','PINN','conformal prediction','finite volume'],hi:0,
+ kv:[['Variance cut','12.42 K → 0.27 K'],['Violation rate','14.4% → 5.8%'],['Claims audited','104 / 104'],['Reproduces in','< 2 core-hours']],
+ body:`<h4>The question</h4><p>Two questions decide whether a surrogate is usable rather than merely demonstrable, and both are routinely unanswered: how much of the reported accuracy survives a change of random seed, and how large an error allowance a decision rule needs to stay safe.</p>
+ <h4>Method</h4><ul><li>Finite volume reference solver with temperature-dependent conductivity and specific heat</li><li>Verified twice: exact Kirchhoff solution to 7.3e-10 K, and manufactured solutions at observed order 2.00 spatial, 0.95 temporal</li><li>Four configurations at identical architecture (7,345 parameters) and budget (1,500 Adam + 300 L-BFGS), three seeds each</li><li>Surrogate used as a hard inequality constraint in a coolant scheduler, then calibrated</li></ul>
+ <h4>Results</h4><ul><li>The residual substitutes for data: with zero reference solutions it beats a supervised model given four</li><li>Seed standard deviation of field RMSE falls from 12.42 K to 0.27 K, a factor of about 45</li><li>Used directly as a constraint it violated the limit on 14.4 per cent of manoeuvres. A split-conformal allowance restored the nominal 5 per cent, at 5.8</li><li>Calibrated allowance varies by a factor of 15 across surrogates of identical architecture, so it is a property of the trained model and must be measured</li><li>Reported honestly: given 24 reference solutions, plain supervised training was twice as accurate in-envelope</li></ul>
+ <h4>Figures</h4>`,
+ figs:[['figures/surrogates/fig_surrogate.png','Surrogate prediction against the reference solver'],
+       ['figures/surrogates/fig_control.png','Structural margin against coolant setting. More coolant is not automatically safer: the feasible set is an interval, not a half-line'],
+       ['figures/surrogates/fig_reference.png','A representative reference solution: commanded flux, through-thickness temperature evolution, peak stress and margin']],
+ links:[['Full case study',REPO+'physics-informed-surrogates.md'],['Code',' https://github.com/hassaanshahid97-cyber/scramjet-pinn-surrogate'],['Preprint DOI','https://doi.org/10.5281/zenodo.21788995']]},
 
-   The page works fine without them — tasteful placeholders appear instead.
-   ════════════════════════════════════════════════════════════════════════ */
-const PHOTO = "images/profile.jpg";
-const IMGX  = {
-  "proj_a380": "images/proj_a380.jpg",
-  "proj_nozzle": "images/proj_nozzle.jpg",
-  "proj_tras": "images/proj_tras.jpg",
-  "gal_stellarx1": "images/gal_stellarx1.jpg",
-  "gal_stellarx2": "images/gal_stellarx2.jpg",
-  "gal_stellarx3": "images/gal_stellarx3.jpg",
-  "gal_orbitx2": "images/gal_orbitx2.jpg",
-  "gal_orbitx3": "images/gal_orbitx3.jpg",
-  "gal_sae2": "images/gal_sae2.jpg",
-  "award_ndbfc18": "images/award_ndbfc18.jpg",
-  "award_ndbfc17": "images/award_ndbfc17.jpg"
-};
-const LOGOS = {};
-/* ══════════════════ END OF PASTE BLOCK ══════════════════ */
+{id:'uav-gas-turbine-code',cat:'sciml',title:'Micro gas turbine design and performance code',
+ when:'Sep 2024 to Jul 2025 · B.Sc. degree project',img:'figures/gas-turbine/01_uav-microjet-gte-integration.png',
+ blurb:'A self-contained C++ and NPSS tool coupling a Brayton cycle model to an aerodynamic build-up and a second-by-second mission simulator. Nominated Best Final Year Project.',
+ tags:['C++','NPSS','MATLAB','propulsion'],
+ kv:[['Benchmark','AMT Olympus HP 230N'],['Static thrust','230 N'],['Max RPM','108,500'],['Pressure ratio','≈ 3.8']],
+ body:`<h4>The gap</h4><p>Engine decks exist and vehicle performance tools exist. The coupling is missing, so the question a designer actually asks goes unanswered: can this airframe, with this engine, clear the obstacle at this weight?</p>
+ <h4>What the tool does</h4><ul><li>Lift, drag and flight performance from wetted-area build-up, skin friction and Oswald efficiency</li><li>Thrust, TSFC, RPM and fuel flow across altitude, Mach number and throttle</li><li>Ground roll, transition, climb, cruise, payload drop and descent, phase by phase and second by second</li><li>Real-time trajectory animation with live thrust, drag, rate of climb and fuel</li><li>Runs offline with no licensed package at run time</li></ul>
+ <h4>Validation</h4><p>Cross-checked against Olympus HP manufacturer test data and published maps, component by component rather than on total thrust alone. Validating against a map rather than one operating point is the difference between matching at one throttle setting and behaving correctly across the envelope.</p>
+ <h4>Figures</h4>`,
+ figs:[['figures/gas-turbine/24_compressor-map.png','Compressor map used for the cycle model'],
+       ['figures/gas-turbine/25_turbine-map.png','Turbine map'],
+       ['figures/gas-turbine/12_mission-profile-payload-drop.png','Full mission profile with payload drop, simulated second by second'],
+       ['figures/gas-turbine/21_obstacle-cleared-compatible.png','Obstacle cleared: compatible engine and take-off weight'],
+       ['figures/gas-turbine/22_obstacle-not-cleared-increased-weight.png','Not cleared: same engine, increased weight'],
+       ['figures/gas-turbine/23_obstacle-not-cleared-weaker-engine.png','Not cleared: same weight, weaker engine']],
+ links:[['Full case study',REPO+'uav-gas-turbine-code.md'],['Code','https://github.com/hassaanshahid97-cyber/uav-gas-turbine-performance-tool'],['Archive DOI','https://doi.org/10.5281/zenodo.21805835']]},
 
+{id:'vehicle-aero-rans-spoiler',cat:'cfd',title:'Vehicle aerodynamics and rear spoiler, steady RANS',
+ when:'Mar to Jun 2026 · TMMV08',img:'figures/cfd-cybertruck/velocity-symmetry-plane-ske-vs-sst.png',contain:true,
+ blurb:'A turbulence model validation first, a spoiler design study second. Six full configurations, and a recommendation that reports the drag cost next to the downforce gain.',
+ tags:['ANSYS CFX','RANS','k-omega SST','y+ < 5'],
+ kv:[['Reynolds number','588,000'],['Mesh','3.2M elements, y+ < 5'],['Best config','C_L = −0.094'],['Drag cost','+5.7 %']],
+ body:`<h4>Two questions, kept separate</h4><p>Part I: can steady RANS be trusted on a bluff pickup truck, and does the choice between standard k-epsilon and k-omega SST change the answer? Part II: how much downforce can a rear spoiler generate, and does it improve the lift-to-drag balance rather than just adding drag?</p>
+ <h4>Setup</h4><ul><li>Domain 10L × 2L × 2.5L, reference length L = 5.7068 m, moving ground at 5 m/s, symmetry plane</li><li>Baseline mesh 1,086,846 nodes and 3.2 million elements; SST near-wall mesh at first layer 0.35 mm, y+ &lt; 5</li><li>High Resolution advection, physical timescale 0.1 s; SST initialised from the converged SKE field</li><li>Half model, all forces doubled; fixed dynamic-pressure denominator of 48.997 N</li></ul>
+ <h4>Validation, Part I</h4><p>Residuals showed the sawtooth oscillation around 1e-4 expected of a steady solver on an unsteady wake, so convergence was judged on the drag force monitor settling, not the residual. SST predicts C_D 0.448 and C_L 0.180 against SKE 0.422 and ≈ 0.000, because it resolves the slant-apex separation more sharply. SST was adopted as validated, and the spoiler was then run with both models so the design conclusion could be checked for model dependence.</p>
+ <h4>Results, Part II</h4><ul><li><b>Configuration C</b>, rear spoiler under SKE: near-neutral lift becomes C_L = −0.094, about 4.61 N of downforce, drag 0.422 → 0.446, a 5.7 per cent penalty</li><li>Configuration B, same position under SST: lift reduced 0.180 → 0.131. Both models agree on the trend, not the magnitude</li><li>Top-of-slant mounting is a clear failure: C_D 0.855 under SST and 1.499 under SKE, two to three times baseline, for no useful lift change</li></ul>
+ <h4>Figures</h4>`,
+ figs:[['figures/cfd-cybertruck/accumulated-cd-cl-ske-vs-sst.png','Accumulated C_D and C_L along the vehicle. Plotting accumulation rather than totals shows where the models diverge'],
+       ['figures/cfd-cybertruck/spoiler-streamlines-and-pressure.png','Configuration C: streamlines over the spoiler, and the localised high-pressure zone ahead of it that generates the downforce'],
+       ['figures/cfd-cybertruck/a3-poster.png','A3 conference poster summarising the study']],
+ links:[['Full case study',REPO+'vehicle-aero-rans-spoiler.md']]},
 
-/* ─────────────────────────────  DATA  ───────────────────────────── */
-const experience = [
-  {role:"Flygingenjör — LUFF (Linköping University Flight Association)", co:"Linköping University", loc:"Linköping, Sweden", type:"Part-time", date:"Dec 2025 — Present",
-   points:["Contributing to aircraft design and manufacturing for university-level aeronautical competitions.","Applying hands-on composite fabrication skills in a Swedish-language technical environment.","Integrated into LiU's aerospace engineering community to strengthen cross-team collaboration."],
-   skills:["Aircraft Design","Composites","Aeronautics"]},
-  {role:"Systems Integration Lead — SAE Aero Design (Team Findus)", co:"Team Findus", loc:"Linköping, Sweden", type:"Part-time", date:"Dec 2025 — Present",
-   points:["Led a multidisciplinary team designing and manufacturing a heavy-lift RC aircraft for SAE Brasil Aero Design.","Architected a systems-engineering workflow spanning structural, propulsion and avionics sub-teams.","Coordinated technical design reviews with counterpart teams at KTH and Chalmers."],
-   skills:["Systems Engineering","UAV Design","Composite Structures","Electric Propulsion","Team Leadership"]},
-  {role:"Team Captain", co:"Team Findus", loc:"Linköping, Sweden", type:"Part-time", date:"Dec 2025 — Present",
-   points:["Spearheaded design and flight of a heavy-lift RC aircraft for the SAE Brasil Aero Design competition.","Collaborated closely with faculty to meet rigorous competition standards and safety gates.","Built a culture of iteration and shared ownership across the team."],
-   skills:["Team Leadership","Aircraft Design","CAD","AutoCAD"]},
-  {role:"Executive Chief — AIAA-IST Chapter (AVIATE'24 Lead)", co:"AIAA", loc:"Islamabad, Pakistan", type:"Leadership", date:"Jun 2024 — Sep 2025",
-   points:["Led organisation and execution of AVIATE'24, a national inter-university UAV design competition.","Managed event logistics, flight-safety compliance and technical inspection protocols.","Mentored junior engineering teams through the full competition framework."],
-   skills:["Flight Safety","Event Management","Aerospace Leadership"]},
-  {role:"Technical Team Engineer (UAVs & Drones) — AIAA IST Chapter", co:"AIAA", loc:"Islamabad, Pakistan", type:"Engineering", date:"Jul 2023 — Sep 2025",
-   points:["Designed and fabricated fixed-wing UAV platforms for competitive, mission-specific applications.","Ran aerodynamic analysis in XFLR5 to optimise airfoil selection for endurance and stability.","Engineered propulsion packages focused on thrust efficiency and realistic power budgets."],
-   skills:["XFLR5","ANSYS","MATLAB","Simulink","CATIA V5","ArduPilot","Aerodynamics","CFD","UAV Propulsion"]},
-  {role:"Flight Control Design Engineer", co:"NaqCoDE Technologies Pvt Ltd", loc:"Islamabad, Pakistan", type:"Internship", date:"Jul 2024 — Sep 2024",
-   points:["Engineered HIL simulation infrastructure to validate autonomous flight-control systems, cutting integration risk.","Designed and commissioned a custom iron-bird testbed for aerodynamic load simulation.","Integrated and tuned Pixhawk 6X controllers with ArduPlane for complex waypoint missions via real-time telemetry.","Authored SOPs and technical documentation for avionics and flight-test operations."],
-   skills:["HIL","Iron Bird Testing","Pixhawk 6X","Control Systems Design","MATLAB","Simulink","Mission Planner"]},
-  {role:"Audit Associate", co:"PwC", loc:"Lahore, Pakistan", type:"Internship", date:"Nov 2019 — Jun 2021",
-   points:["Early-career exposure to structured audit methodology, financial risk assessment and reporting standards in a Big Four environment.","Where the habit of checking every number against a source came from."],
-   skills:["Auditing","Financial Statement Auditing"]}
+{id:'skylight-midsize-airliner',cat:'design',title:'SKYLIGHT, new midsize aircraft conceptual design',
+ when:'Jan to Jun 2026 · TMAL51',img:'figures/skylight/isometric-render.png',contain:true,
+ blurb:'A converged 252-passenger airliner sized under FAR Part 25, and a documented account of why the statistical sizing model had to be replaced by physics-based synthesis.',
+ tags:['BeX','PreSTo','FAR Part 25','conceptual design'],
+ kv:[['Passengers','252, single aisle'],['MTOW','212,957 kg'],['Cruise','Mach 0.77'],['Harmonic range','4,533 nm']],
+ body:`<h4>Problem</h4><p>The middle of the market: long-range single-aisles are too small, wide-bodies too heavy. Design mission London Heathrow to Chicago O'Hare, 4,500 to 5,000 nm, 250 to 270 passengers, under FAR Part 25.</p>
+ <h4>The method, and where it broke</h4><p>Stage one was a singular value decomposition over a competitor database with a 4 per cent residual error, which looks like success. Stage two was iterative physics-based synthesis in BeX with PreSTo-Cabin. The converged aircraft differs from the SVD prediction in ways the residual did not predict. A low residual on a regression across existing aircraft says the regression fits those aircraft, not that it predicts a new configuration.</p>
+ <h4>Converged aircraft</h4><ul><li>252 passengers, 3-3 single aisle; a twin aisle at this capacity gives too much structure per seat</li><li>Fuselage 54.83 m long, 4.53 m diameter; wing 406 m2, span 66.8 m, aspect ratio 11, sweep 25.9 degrees</li><li>MTOW 212,957 kg, OEW 105,463 kg, design payload 27,720 kg, mission fuel 58,478 kg</li><li>Cruise L/D 15.1, (L/D)max 17.9, C_D0 0.0160, C_Di 0.0122</li><li>Low-speed static margin 29.0 to 36.8 per cent; 8 Type-A doors</li><li>Mach 0.77 rather than faster, because BeX trade studies showed the drag rise did not pay for itself</li></ul>
+ <h4>Figures</h4>`,
+ figs:[['figures/skylight/bex-constraint-matching.png','Constraint matching chart with the selected design point inside the feasible space rather than on a boundary'],
+       ['figures/skylight/payload-range-diagram.png','Payload-range diagram. This is where the design either closes or does not'],
+       ['figures/skylight/vn-maneuver-gust-envelope.png','V-n manoeuvre and gust envelope under FAR Part 25'],
+       ['figures/skylight/cg-excursion-envelope.png','Centre of gravity excursion envelope with the actual loading path on it'],
+       ['figures/skylight/wing-planform-sweep.png','Wing planform, 25.9 degree quarter-chord sweep and taper'],
+       ['figures/skylight/three-view-geometry.png','Exported three-view geometry']],
+ links:[['Full case study',REPO+'skylight-midsize-airliner.md']]},
+
+{id:'sae-heavy-lift-uav',cat:'design',title:'Heavy-lift electric UAV, SAE BRASIL AeroDesign',
+ when:'Mar to Jun 2026 · TMAL06 and Team Findus',img:'images/gal_sae2.jpg',
+ blurb:'An aircraft sized against a transient load case: what happens to the centre of gravity when a 1.0 kg glider leaves the aircraft in flight, carried analytically through to a static margin.',
+ tags:['team captain','OpenVSP','XFLR5','stability'],hi:1,
+ kv:[['MTOW','17.0 kg'],['Payload','10.0 kg + 1.0 kg glider'],['Static margin','14.2 → 16.3 %'],['Take-off field','20.5 m of 55 m']],
+ body:`<h4>My role</h4><p>Team Captain and Lead Systems Engineer of Team Findus since December 2025, systems integration lead for fuselage and landing gear, and compiler of the technical report submitted to the competition. Five-person team, supervisor Ludvig Knöös Franzén, examiner David Lundström.</p>
+ <h4>The design driver</h4><p>The aircraft must be stable fully loaded and still stable immediately after releasing a 1.0 kg glider mounted aft of its own centre of gravity, without saturating elevator trim authority. The glider station was chosen for that reason, not for packaging convenience.</p>
+ <h4>Design point and aircraft</h4><ul><li>W/S = 200 N/m2 and T/W = 0.56, locked above the minimum feasible wing loading to buy a smaller, lighter wing with unused take-off margin</li><li>Take-off field 20.5 m against a 55 m limit; landing 55.4 m against 100 m; projected flight bonus ≈ 70 points</li><li>Tapered NACA 2415 wing, 2.50 m span, 0.834 m2; boom-and-pod fuselage; fixed tricycle gear</li><li>T-Motor AM670 with APC 17×8E on 6S, 94.2 N static thrust</li></ul>
+ <h4>Results</h4><ul><li>NACA 2415 cuts |C_m,0| by 53 per cent to 0.043, shrinking the horizontal tail and saving empty weight. An aerodynamic choice made for its structural consequence</li><li>Component build-up gives C_D0 = 0.02625 and 4.80 N parasite drag in cruise</li><li>CG 0.4903 m, neutral point 0.6287 m, MAC 0.339 m, static margin 14.2 per cent</li><li>Glider release shifts CG forward 7 mm, raising static margin to 16.3 per cent. The aircraft becomes more stable at release, by a margin small enough not to saturate trim</li></ul>
+ <h4>Figures</h4>`,
+ figs:[['figures/sae-uav/constraint-diagram-ws-tw.png','Constraint diagram, thrust to weight against wing loading, with the design point'],
+       ['figures/sae-uav/three-view-cad-render.png','Three-view CAD render of the mature configuration'],
+       ['figures/sae-uav/cg-calculation-openvsp.png','Centre of gravity build-up in OpenVSP'],
+       ['figures/sae-uav/xflr5-naca2415-lift.png','XFLR5 analysis of the NACA 2415 section'],
+       ['figures/sae-uav/qfd-concept-decision-matrix.png','Quality function deployment and concept decision matrix across five configurations'],
+       ['figures/sae-uav/mission-profile-advanced-class.png','Advanced Class mission profile']],
+ links:[['Full case study',REPO+'sae-heavy-lift-uav.md']]},
+
+{id:'parametric-uav-configurator',cat:'automation',title:'Mission-driven UAV fuselage and landing gear configurator',
+ when:'Mar to Jun 2026 · TMKT57',img:'figures/configurator/generated-fuselage-spec-tree.png',contain:true,
+ blurb:'A VB.NET GUI driving the CATIA V5 COM API through an eight-stage PowerCopy build. Centre of gravity and gear stations are computed from payload before any geometry is generated.',
+ tags:['VB.NET','CATIA V5 API','KBE','SQLite'],
+ kv:[['Build stages','8, no manual steps'],['PowerCopies','5 structural templates'],['Drives','CG and gear station'],['Serves','Team Findus SAE aircraft']],
+ body:`<h4>Problem</h4><p>Manual layout of UAV internal structure is slow and error-prone during conceptual iteration. Every payload change means re-placing bulkheads, re-checking centre of gravity and moving the landing gear. The goal was efficient modelling, not total automation: remove the non-creative work and leave the decisions with the engineer.</p>
+ <h4>The rules the tool encodes</h4><p>The VB.NET layer resolves the layout <i>before</i> CATIA is triggered:</p>
+ <ul><li>Fuselage_Length = f(payload, battery volume)</li><li>CG_System = Σ(mass<sub>i</sub> · x<sub>i</sub>) / total mass</li><li>Gear_Station_X = CG_System + offset</li></ul>
+ <p>Geometry is generated from a resolved layout rather than generated and then checked, so the model cannot end up with the gear ahead of the centre of gravity by accident.</p>
+ <h4>Structural library</h4><p>Five reusable PowerCopies form the semi-monocoque fuselage: bulkheads at payload boundaries, intermediate frames, stringers and longerons, patterned lightening holes, and skin with nose. SAE shipping box limits, balsa and plywood material presets for laser cutting, and lightening hole patterns are hard-coded so an untransportable design cannot be generated.</p>
+ <h4>Two COM interop problems worth recording</h4><ul><li>AddNewPad() rejects HybridShapeOffset planes as sketch supports. Fix: always sketch on the YZ plane and slide the solid with Pad.OffsetLength</li><li>Passing Nothing to the optional third argument of AddSectionToLoft() raises "parameter not optional". VB.NET interop needs the argument omitted entirely</li></ul>
+ <h4>Figures</h4>`,
+ figs:[['figures/configurator/bulkhead-generation.png','Bulkhead frames generated at their X stations'],
+       ['figures/configurator/generated-landing-gear.png','Generated nose and main landing gear struts and wheels'],
+       ['figures/configurator/fuselage-skin-segments.png','Sketch geometry driving the skin segments']],
+ links:[['Full case study',REPO+'parametric-uav-configurator.md'],['Code','https://github.com/hassaanshahid97-cyber/catia-v5-fuselage-configurator']]},
+
+{id:'hil-iron-bird',cat:'flight',title:'Hardware-in-the-loop and Iron Bird validation framework',
+ when:'Jun to Aug 2024 · NaqCoDE Technologies',img:'',
+ blurb:'A real-time rig that closes a Pixhawk 6X onto X-Plane over MAVLink, with measured actuator latency reconciled against the Simulink model rather than assumed equal.',
+ tags:['Pixhawk 6X','ArduPlane','MAVLink','X-Plane','Jetson'],
+ kv:[['Loop','Real time, hardware in the loop'],['Measured','Actuator latency and rate'],['Validated','C_L α and C_m q under gust'],['Vision','NVIDIA Jetson in loop']],
+ body:`<h4>Problem</h4><p>Flying an autonomous UAV to find out whether its control law works is expensive, and the failure modes that matter, actuator lag and gust response, are exactly the ones a desktop simulation gets wrong.</p>
+ <h4>Architecture</h4><ul><li>X-Plane physics engine coupled to a Pixhawk 6X running ArduPlane over MAVLink, in real time</li><li>Physical Iron Bird with digital servos on representative surfaces and rotary encoders on the output shafts</li><li>NVIDIA Jetson vision node in the loop, seeing the same simulated world</li></ul>
+ <h4>What the rig measured</h4><ul><li>Actuator latency and response rate timed on the encoder, then compared against the MATLAB and Simulink model of the same actuator. Model and hardware reconciled, not assumed equal</li><li>Stability derivatives including C_L alpha and C_m q validated under gust inside the closed loop</li><li>Servo and linkage reliability at flight duty cycle, on the bench, where a failure costs a servo instead of an airframe</li></ul>
+ <h4>Why it matters</h4><p>A 20 ms discrepancy in servo lag is invisible in desktop simulation, changes the phase margin of the inner loop, and shows up as an oscillation on approach. Measuring it moves that discovery from the flight line to the lab.</p>`,
+ figs:[],links:[['Full case study',REPO+'hil-iron-bird.md']]},
+
+{id:'twin-rotor-aerodynamical-system',cat:'flight',title:'Twin Rotor Aerodynamical System control rig',
+ when:'Dec 2022 to Jul 2023',img:'images/proj_tras.jpg',
+ blurb:'A helicopter-like laboratory plant built from scratch: high order, nonlinear, strongly cross-coupled, and instrumented so it can actually be identified.',
+ tags:['control','system identification','instrumentation'],
+ kv:[['Plant','Nonlinear, cross-coupled'],['Actuation','Twin DC rotors, fixed pitch'],['Sensing','Pivot encoders, rotor speed'],['Purpose','System ID and control design']],
+ body:`<h4>Why this plant</h4><p>A twin rotor system behaves like a helicopter in the ways that make helicopters hard: a change in main rotor speed produces a yaw moment as well as a pitch response. It is the standard hard case for multivariable control, and building it rather than buying it meant owning the sensing and the identification as well as the controller.</p>
+ <h4>Build</h4><ul><li>Beam pivoted for horizontal and vertical rotation with a counterbalance arm</li><li>Main and tail rotors driven by DC motors at fixed blade angle of attack</li><li>Pivot encoders for angles, speed sensors for rotor angular velocities, so the state vector is measured rather than inferred</li><li>Aerodynamic forces varied through rotor speed, which keeps the nonlinearity in the aerodynamics and coupling rather than the actuation</li></ul>`,
+ figs:[],links:[['Full case study',REPO+'twin-rotor-aerodynamical-system.md']]},
+
+{id:'cd-nozzle-shock-analysis',cat:'cfd',title:'Shock structure in a convergent-divergent nozzle',
+ when:'Sep to Nov 2023',img:'images/proj_nozzle.jpg',
+ blurb:'Oblique and normal shock interaction in an indigenously designed nozzle at off-design pressure ratio. Method and results reviewed and approved by fluid dynamics faculty.',
+ tags:['ANSYS Fluent','compressible flow','shocks'],
+ kv:[['Solver','Density-based compressible'],['Traced','Inlet, throat, exit'],['Focus','Oblique and normal shock interaction'],['Review','Approved by faculty']],
+ body:`<h4>Objective</h4><p>Study how the shock system forms and propagates inside a convergent-divergent nozzle operated away from its design pressure ratio, and what it does to the exit condition.</p>
+ <h4>Method</h4><ul><li>Density-based compressible solver, appropriate to a shock-dominated internal flow</li><li>Shock formation and propagation traced through the divergent section</li><li>Flow parameters analysed region by region including total pressure loss across the shock system</li><li>Reviewed and approved by fluid dynamics faculty before submission</li></ul>
+ <h4>Outcome</h4><p>A clear picture of how the oblique and normal shock system sets the exit condition, and how far the nozzle departs from ideal isentropic expansion off design.</p>`,
+ figs:[],links:[['Full case study',REPO+'cd-nozzle-shock-analysis.md']]},
+
+{id:'eh-5963-widebody',cat:'design',title:'EH-5963 wide-body design study',
+ when:'Aug 2023 to Feb 2024',img:'images/proj_a380.jpg',
+ blurb:'Full conceptual design cycle for a 530-passenger Mach 0.86 aircraft using Raymer RDS, Datcom and CATIA V5. The study where I learned why statistical sizing needs checking.',
+ tags:['Raymer RDS','Datcom','CATIA V5'],
+ kv:[['Passengers','530'],['Cruise','Mach 0.86'],['Stability','Datcom derivatives'],['Model','CATIA V5']],
+ body:`<h4>Method</h4><ul><li>Mission definition and initial sizing from statistical empty weight fractions</li><li>Configuration layout and cabin arrangement</li><li>Aerodynamic build-up, parasite and induced drag across the envelope</li><li>Component weight estimation iterated to a converged take-off weight</li><li>Stability and control derivatives from Datcom, checked longitudinally and directionally</li><li>Configuration model in CATIA V5</li></ul>
+ <h4>What changed afterwards</h4><p>This study predates SKYLIGHT by two years, and the difference is the point. EH-5963 was sized with statistical methods and checked. SKYLIGHT was sized statistically and then re-sized with physics-based synthesis when the statistics proved unreliable. The second approach is the one I use now, and this is where I learned why.</p>`,
+ figs:[],links:[['Full case study',REPO+'eh-5963-widebody.md']]},
+
+{id:'c17-performance-study',cat:'design',title:'Boeing C-17 performance study',
+ when:'Nov 2023 to Jan 2024 · graded 90/100',img:'',
+ blurb:'Complete envelope performance for a heavy transport: steady, accelerated, turning and climbing flight, take-off and landing, each result traced to its governing equation.',
+ tags:['performance','flight envelope'],
+ kv:[['Grade','90 of 100'],['Segments','6, full envelope'],['Inputs','Published geometry and engine data'],['Method','First principles']],
+ body:`<h4>Scope</h4><ul><li>Steady level flight: thrust and power required against available, speed bounds, ceilings</li><li>Accelerated flight: energy height and specific excess power</li><li>Turning flight: load factor limits, sustained and instantaneous turn rate, corner speed</li><li>Climbing flight: rate and angle of climb, time to altitude</li><li>Take-off: ground roll, rotation, obstacle clearance</li><li>Landing: approach, flare, ground roll with reverse thrust</li></ul>
+ <h4>Approach</h4><p>Every result traced back to its governing equation and the assumption behind it. For a transport aircraft the interesting part is where the assumptions stop being safe: drag polar validity at high lift coefficient, thrust lapse with altitude, and the ground effect and reverse thrust models that dominate field performance.</p>`,
+ figs:[],links:[['Full case study',REPO+'c17-performance-study.md']]},
+
+{id:'stellar-x-surveillance-uav',cat:'built',title:'Stellar-X surveillance UAV',
+ when:'2024 to 2025',img:'images/gal_stellarx2.jpg',
+ blurb:'Lightweight electric surveillance UAV, designed in SOLIDWORKS, validated in ANSYS, flown and tuned. 50 minutes of endurance at 5.0 kg.',
+ tags:['SOLIDWORKS','ANSYS','Pixhawk','flight test'],
+ kv:[['MTOW','5.0 kg'],['Wingspan','1.69 m'],['Cruise','26.5 m/s'],['Endurance','50 min']],
+ body:`<h4>Engineering</h4><ul><li>Full airframe and internal layout modelled in SOLIDWORKS</li><li>ANSYS Structural and CFD, aerostructural load cases before build</li><li>Avionics: Pixhawk 2.4.8, ELRS RadioMaster link, Caddx Ratel 2 FPV</li><li>Real-time embedded flight testing and control tuning</li></ul>
+ <h4>The endurance number is the design</h4><p>50 minutes at 5.0 kg on a 1.69 m span is an energy problem before it is an aerodynamic one. Span loading, cruise speed and structural mass fraction are all being traded against battery mass.</p>
+ <h4>Figures</h4>`,
+ figs:[['images/gal_stellarx1.jpg','Stellar-X during build'],['images/gal_stellarx3.jpg','Stellar-X in flight']],
+ links:[['Full case study',REPO+'stellar-x-surveillance-uav.md']]},
+
+{id:'orbit-x-composite-uav',cat:'built',title:'Orbit-X composite UAV',
+ when:'2024 to 2025',img:'images/gal_orbitx3.jpg',
+ blurb:'Carbon fibre high-wing monoplane with Level 1 autonomy and a servo-actuated payload drop, designed, fabricated and piloted by the team that built it.',
+ tags:['composites','Pixhawk','payload drop','STOL'],
+ kv:[['MTOW','2.4 kg'],['Airfoil','NACA 0015'],['Limit load','3g'],['STOL take-off','38 m']],
+ body:`<h4>Systems</h4><ul><li>Level 1 autonomy on Pixhawk: take-off, landing, stabilise, return to launch</li><li>Payload-drop mechanism with servo-actuated precision targeting</li><li>Carbon fibre composite primary structure, laid up in house</li></ul>
+ <h4>Why a symmetric section</h4><p>NACA 0015 is an unusual choice for an efficiency-focused airframe, and it is a manufacturing decision as much as an aerodynamic one: thick and symmetric is tolerant of hand layup, gives depth for the spar, and behaves predictably in the attitudes a student-piloted aircraft will see. The 3g limit load and 38 m STOL requirement then set the structure.</p>
+ <h4>Figures</h4>`,
+ figs:[['images/gal_orbitx2.jpg','Orbit-X structure during build']],
+ links:[['Full case study',REPO+'orbit-x-composite-uav.md']]},
+
+{id:'kira-9-uav',cat:'built',title:'KIRA-9 propeller-driven UAV',
+ when:'Jan to Feb 2024',img:'images/award_ndbfc18.jpg',
+ blurb:'A single-engine high-wing competition aircraft designed, built and flown inside two months, in a competition cycle the team won in 2023 and 2024.',
+ tags:['design-build-fly','composites','XPS foam'],
+ kv:[['Timescale','2 months, concept to flight'],['Structure','Carbon fibre and XPS foam'],['Wing','Custom spars'],['Result','Competition won 2023 and 2024']],
+ body:`<h4>The constraint that shapes every decision</h4><p>The calendar. In a two-month design-build-fly cycle the airframe has to be manufacturable and repairable by the same people who designed it, with what is in the workshop. That rules out configurations that are aerodynamically better and structurally slower, and rewards designs whose failure modes are repairable between flights.</p>
+ <h4>Figures</h4>`,
+ figs:[['images/award_ndbfc17.jpg','National Design-Build-Fly Competition']],
+ links:[['Full case study',REPO+'kira-9-uav.md']]},
+
+{id:'ultrasonic-occupant-counter',cat:'flight',title:'Ultrasonic occupant counter',
+ when:'Feb to Jul 2024',img:'',
+ blurb:'A real-time bidirectional people counter on an Arduino UNO, with the logic written against the failure cases rather than the happy path.',
+ tags:['Arduino','instrumentation','state machine'],
+ kv:[['Hardware','Arduino UNO'],['Sensing','Paired ultrasonic beams'],['Direction','From beam-break ordering'],['Design focus','Edge cases']],
+ body:`<h4>Implementation</h4><p>Two ultrasonic beams a fixed distance apart. The order in which the beams break gives direction of travel, which a single sensor cannot resolve at any sample rate.</p>
+ <h4>The specification is the edge cases</h4><ul><li>A stationary object parked inside a beam, which otherwise latches the count</li><li>Two people crossing simultaneously in opposite directions</li><li>A person who enters the first beam and reverses without crossing</li><li>Debounce and timeout on both channels</li></ul>
+ <p>Small project, but it carries the habit that matters: the happy path is the easy part.</p>`,
+ figs:[],links:[['Full case study',REPO+'ultrasonic-occupant-counter.md']]}
 ];
 
-const projects = [
-  {title:"Seed variability & calibrated error bounds for PINN surrogates", tag:"Research", cat:"research", date:"2026 — under review",
-   desc:"Sole-authored study on physics-informed surrogates for nonlinear transient conjugate heat transfer. Verified finite-volume reference solver, 4 configurations × 3 seeds, split-conformal error allowance validated in closed loop. 104/104 quantitative claims re-verified by an audit script. Submitted to Heat Transfer Engineering (Taylor & Francis)."},
-  {title:"Generic Gas-Turbine Performance Code for UAVs", tag:"Final Year Project", cat:"propulsion", date:"Oct 2024 — Jun 2025",
-   desc:"MATLAB-based thermodynamic cycle modelling tool for micro turbojet engine design and performance monitoring, validated against NPSS industry data — built to run offline and independently for private applications. Nominated for best final-year project."},
-  {title:"EH-5963 Wide-Body Aircraft Design (A380 reference)", tag:"Aero Vehicle Design", cat:"design", date:"Aug 2023 — Feb 2024",
-   desc:"Full conceptual design of a 530-passenger wide-body airliner — mission profiling, sizing, CATIA V5 configuration layout, propulsion integration, stability (Datcom) and cost analysis (RDS). Mach 0.86, 7 900 nmi range."},
-  {title:"KIRA-9 Fixed-Wing UAV", tag:"Design + Flight", cat:"uav", date:"Jan 2024 — Feb 2024",
-   desc:"Single-engine high-wing UAV in carbon-fibre composite and XPS foam with custom wing spars. A highly stable small-payload platform — competed at UCP, Lahore. NACA 2415 wing, 1.32 m span."},
-  {title:"Mach Shock Analysis — Convergent-Divergent Nozzle", tag:"CFD", cat:"cfd", date:"Sep 2023 — Nov 2023",
-   desc:"ANSYS Fluent study of oblique and normal shocks in an indigenous nozzle design, examining effects on inlet, throat and exit flow parameters. Reviewed and approved by a Fluid Dynamics PhD."},
-  {title:"Twin-Rotor Aerodynamic System (TRAS)", tag:"Control Systems", cat:"control", date:"Dec 2022 — Jul 2023",
-   desc:"Helicopter-like control test rig — a high-order nonlinear MIMO system with strong cross-coupling. Modelled and controlled rotor speeds across horizontal and vertical planes for control experiments."},
-  {title:"Ultrasonic Occupancy Counter", tag:"Instrumentation", cat:"control", date:"Feb 2024 — Jul 2024",
-   desc:"Real-time bi-directional occupancy counter using HC-SR04 sensors, Arduino UNO and an OLED display, with dual-sensor logic, edge-case handling and configurable occupant-limit alerts."}
+const SKILLS=[
+ ['Physics-informed neural networks, JAX, autodiff','Used in anger',100,'Sole-authored preprint'],
+ ['Conformal prediction and uncertainty quantification','Used in anger',100,'Split-conformal allowance validated in closed loop'],
+ ['Finite volume PDE solvers, nonlinear transient','Used in anger',100,'Reference solver written and verified from scratch'],
+ ['Verification: manufactured solutions, convergence','Used in anger',100,'Preprint and RANS study'],
+ ['ANSYS Fluent and CFX, RANS, turbulence modelling','Used in anger',100,'3.2M element mesh at y+ < 5, model comparison'],
+ ['Aircraft conceptual design, sizing, stability','Used in anger',100,'SKYLIGHT, EH-5963, SAE heavy-lift UAV'],
+ ['Gas turbine cycle modelling, NPSS, engine maps','Used in anger',100,'Degree project, Olympus HP 230N benchmark'],
+ ['CATIA V5 API automation, VB.NET, KBE','Used in anger',100,'Eight-stage PowerCopy configurator'],
+ ['SOLIDWORKS, CAD for manufacture, composites','Used in anger',100,'Stellar-X, Orbit-X, KIRA-9'],
+ ['Hardware- and software-in-the-loop, Pixhawk, MAVLink','Used in anger',100,'NaqCoDE Iron Bird rig'],
+ ['MATLAB and Simulink','Used in anger',100,'Degree project, HIL validation, teaching'],
+ ['Python scientific stack, Git, reproducible research','Used in anger',100,'Audited, MIT-licensed preprint repository'],
+ ['C++','Working',62,'Degree project tool'],
+ ['Finite element analysis','Working',62,'Coursework, TMHL63'],
+ ['GPU and HPC for wave propagation','Aware',30,'Named target for thesis work'],
+ ['Synthetic aperture radar, EM scattering','Aware',30,'Read into, not yet worked with']
 ];
 
-const PROJ_FILTERS = [
-  {k:"all", l:"All"}, {k:"research", l:"Research"}, {k:"uav", l:"UAV"},
-  {k:"control", l:"Control & avionics"}, {k:"cfd", l:"CFD"},
-  {k:"propulsion", l:"Propulsion"}, {k:"design", l:"Aircraft design"}
-];
+/* ============================ render ============================ */
+var io=null;
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const grid=document.getElementById('grid'), filters=document.getElementById('filters');
+let active='all';
 
-const education = [
-  {yr:"Aug 2025 — Jul 2027", school:"Linköping University", deg:"MSc — Aeronautical Engineering",
-   fld:"Specialisation: Flight Control Systems Engineering & Autonomous Aerial Vehicles · Civilingenjör · 120 hp"},
-  {yr:"Sep 2021 — Jul 2025", school:"Institute of Space Technology (IST)", deg:"BSc — Aerospace Engineering",
-   fld:"4-year programme (240 ECTS equiv.) · Thesis on UAV gas-turbine performance modelling — nominated for best final-year project"},
-  {yr:"Feb 2017 — Dec 2020", school:"University of the Punjab", deg:"Associate Degree — Commerce (B.Com)",
-   fld:"Commerce & MIS · Cost Accounting, Financial Reporting, Audit & Assurance"}
-];
+function count(c){return c==='all'?P.length:P.filter(p=>p.cat===c).length}
+filters.innerHTML=CATS.map(([k,l])=>
+  `<button class="chip" data-cat="${k}" aria-pressed="${k==='all'}">${l}<span class="n">${count(k)}</span></button>`).join('');
 
-const awards = [
-  {ic:"🏆", yr:"Dec 2024", title:"Winner — NDBFC 18 (Team Nova)", org:"HEC Pakistan & GIKI",
-   desc:"Led automation, propulsion and fabrication of Orbit-X — the most structurally advanced UAV built by the team, with MATLAB-driven design iteration."},
-  {ic:"🥇", yr:"Nov 2023", title:"Winner — NDBFC 17 (Team 10.3)", org:"HEC Pakistan & GIKI",
-   desc:"Designed and co-led fabrication of Carbon-8 — handled airfoil analysis, detailed CAD/manufacturing and ground testing to clinch first place."},
-  {ic:"🥈", yr:"Feb 2023", title:"Runner-up — UCP Taakra'23 FYOP", org:"University of Central Punjab",
-   desc:"Led design and analysis for a UAV that placed second in the design-and-fly category, working closely with fabrication for clean execution."}
-];
-
-const skillCats = [
-  {h:"Flight Control & Avionics", items:[
-    ["PID / LQR control design",90],["State-space modelling",88],["ArduPilot / ArduPlane",85],
-    ["Pixhawk 6X integration",85],["Mission Planner",82],["Flight mechanics",88]]},
-  {h:"Simulation & Test", items:[
-    ["MATLAB",95],["Simulink",90],["SIL / HIL testing",85],["Iron-bird testbed design",80],
-    ["ANSYS Fluent / ICEM CFD",85],["XFLR5",88],["NPSS / GASTURB",78]]},
-  {h:"Design & Manufacturing", items:[
-    ["CATIA V5",88],["SOLIDWORKS (certified)",90],["AutoCAD",82],["Composite fabrication",85],
-    ["Additive manufacturing (certified)",80],["RDS / aircraft sizing",78]]},
-  {h:"Research & Numerical Methods", items:[
-    ["Physics-informed neural networks",85],["JAX / automatic differentiation",82],
-    ["Finite volume methods",85],["Code verification (MMS, exact solutions)",88],
-    ["Conformal prediction / UQ",80],["Reproducible research practice",92]]},
-  {h:"Programming", items:[
-    ["MATLAB",95],["Python (NumPy / SciPy / JAX)",85],["C++",72],["Git / open-source workflow",84]]},
-  {h:"Engineering & Leadership", items:[
-    ["Aerodynamics",90],["Propulsion systems",85],["Aerospace structures",82],
-    ["Systems engineering",85],["Team leadership",90],["Technical writing",92]]}
-];
-
-const certs = [
-  {t:"Registered Aerospace/Aeronautical Engineer", iss:"Pakistan Engineering Council", dt:"May 2026"},
-  {t:"UAS A1/A3 Open Sub-Category Licence", iss:"EASA — EU Aviation Safety Agency", dt:"May 2026 · exp 2031"},
-  {t:"Certified SOLIDWORKS Design Associate", iss:"Dassault Systèmes", dt:"May 2026"},
-  {t:"Certified SOLIDWORKS Additive Manufacturing Associate", iss:"Dassault Systèmes", dt:"May 2026"},
-  {t:"Certified Engineer — Aerospace", iss:"Sveriges Ingenjörer (Engineers of Sweden)", dt:"Jan 2026"},
-  {t:"Student Affiliate", iss:"Royal Aeronautical Society", dt:"Mar 2026 · exp 2027"},
-  {t:"SeQF Level 6 Qualification", iss:"Swedish Council for Higher Education (UHR)", dt:"May 2026"},
-  {t:"IELTS", iss:"British Council", dt:"Aug 2024 · exp 2026"},
-  {t:"Young Professional", iss:"AIAA", dt:"Jul 2025"},
-  {t:"Data Science · AI · Blockchain", iss:"Insider Digital Solutions", dt:"Sep 2023"}
-];
-
-const GALLERY = [
-  {key:"gal_stellarx2", cap:"Stellar-X surveillance UAV — flight-ready"},
-  {key:"gal_stellarx1", cap:"Pre-flight checks — Stellar-X"},
-  {key:"gal_stellarx3", cap:"Stellar-X — carbon-composite airframe"},
-  {key:"gal_orbitx2",   cap:"Orbit-X — SOLIDWORKS CAD model"},
-  {key:"gal_orbitx3",   cap:"Orbit-X — ANSYS CFD: velocity & pressure"},
-  {key:"gal_sae2",      cap:"MSc Aeronautical Engineering — Linköping University"}
-];
-
-const PROJ_IMG_KEY = {
-  "EH-5963 Wide-Body Aircraft Design (A380 reference)":"proj_a380",
-  "Mach Shock Analysis — Convergent-Divergent Nozzle":"proj_nozzle",
-  "Twin-Rotor Aerodynamic System (TRAS)":"proj_tras"
-};
-const AWARD_IMG_KEY = {
-  "Winner — NDBFC 18 (Team Nova)":"award_ndbfc18",
-  "Winner — NDBFC 17 (Team 10.3)":"award_ndbfc17"
-};
-const CERT_KEY = {
-  'Pakistan Engineering Council':'cert::Registered Aerospace/Aeronautical Engineer',
-  'EASA — EU Aviation Safety Agency':'cert::UAS A1 A3 OPEN SUB Category License',
-  'Dassault Systèmes':'cert::Certified SOLIDWORKS Design Associate',
-  'Sveriges Ingenjörer (Engineers of Sweden)':'cert::Certified Engineer Aerospace',
-  'Royal Aeronautical Society':'cert::Student Affiliate',
-  'Swedish Council for Higher Education (UHR)':'cert::SeQF - Sveriges Referensram for kvalifikationer (6)',
-  'British Council':'cert::International English Language Testing System',
-  'AIAA':'cert::Young professional',
-  'Insider Digital Solutions':'cert::Data Science'
-};
-
-/* ─────────────────────────  ASSET HELPERS  ───────────────────────── */
-const img  = k => (IMGX && IMGX[k]) || "";
-const coLogo   = n => (LOGOS && LOGOS['co::'+n]) || "";
-const certLogo = i => { const k = CERT_KEY[i]; return (k && LOGOS && LOGOS[k]) || ""; };
-const initials = s => s.split(/\s+/).filter(Boolean).slice(0,2).map(w=>w[0]).join('').toUpperCase();
-const el = id => document.getElementById(id);
-const esc = s => String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-
-/* Declared here, not further down: the render functions below call
-   observeReveals(), and a `let` further down would still be in its
-   temporal dead zone at that point. */
-let revealObs;
-function observeReveals(){
-  if(!revealObs){
-    revealObs = new IntersectionObserver((entries, obs)=>{
-      entries.forEach((entry,i)=>{
-        if(!entry.isIntersecting) return;
-        setTimeout(()=>entry.target.classList.add('in'), Math.min(i*55,220));
-        obs.unobserve(entry.target);
-      });
-    },{threshold:.1, rootMargin:'0px 0px -40px 0px'});
-  }
-  document.querySelectorAll('.reveal:not(.in)').forEach(r=>revealObs.observe(r));
+function cardHTML(p,i){
+  const img=p.img?`<div class="card-img${p.contain?' contain':''}"><img src="${p.img}" alt="${esc(p.title)}" loading="lazy"></div>`
+                 :`<div class="card-img"><div class="noimg">${esc(p.tags[0]||'project')}</div></div>`;
+  return `<button class="card reveal" data-i="${i}" aria-haspopup="dialog">
+    ${img}
+    <div class="card-body">
+      <div class="meta">${esc(p.when)}</div>
+      <h3>${esc(p.title)}</h3>
+      <p>${esc(p.blurb)}</p>
+      <div class="tags">${p.tags.map((t,j)=>`<span class="tag${j===0?' hi':''}">${esc(t)}</span>`).join('')}</div>
+      <span class="more">Open details →</span>
+    </div></button>`;
 }
-
-/* ─────────────────────────  HERO PHOTO  ───────────────────────── */
-el('photoFrame').innerHTML = PHOTO
-  ? `<img src="${PHOTO}" alt="Hassaan Shahid">`
-  : `<div class="mono-fallback">HS</div>`;
-
-/* ─────────────────────────  RENDER  ───────────────────────── */
-el('timeline').innerHTML = experience.map(e=>`
-  <div class="tl-item reveal">
-    <div class="tl-top">
-      ${coLogo(e.co)
-        ? `<img class="co-logo" src="${coLogo(e.co)}" alt="${esc(e.co)}" loading="lazy">`
-        : `<div class="co-fallback">${initials(e.co)}</div>`}
-      <div style="min-width:0">
-        <div class="tl-meta"><span class="tl-date">${esc(e.date)}</span><span class="tl-type">${esc(e.type)}</span></div>
-        <h3>${esc(e.role)}</h3>
-        <div class="tl-co">${esc(e.co)} <span class="loc">· ${esc(e.loc)}</span></div>
-        <ul>${e.points.map(p=>`<li>${esc(p)}</li>`).join('')}</ul>
-        <div class="chips">${e.skills.map(s=>`<span class="chip">${esc(s)}</span>`).join('')}</div>
-      </div>
-    </div>
-  </div>`).join('');
-
-el('proj-filters').innerHTML = PROJ_FILTERS.map((f,i)=>
-  `<button class="f-btn${i===0?' on':''}" data-filter="${f.k}">${f.l}</button>`).join('');
-
-function renderProjects(filter='all'){
-  el('projects-grid').innerHTML = projects.map(p=>{
-    const src = img(PROJ_IMG_KEY[p.title]);
-    const show = filter==='all' || p.cat===filter;
-    return `
-    <article class="proj reveal ${show?'':'hide'}" data-cat="${p.cat}">
-      ${src?`<div class="proj-img"><img src="${src}" alt="${esc(p.title)}" loading="lazy"></div>`:''}
-      <div class="proj-body">
-        <div class="pdate"><span>${esc(p.date)}</span><span class="tagm">${esc(p.tag)}</span></div>
-        <h3>${esc(p.title)}</h3>
-        <p>${esc(p.desc)}</p>
-      </div>
-    </article>`;}).join('');
-  observeReveals();
+function render(){
+  const list=P.map((p,i)=>[p,i]).filter(([p])=>active==='all'||p.cat===active);
+  grid.innerHTML=list.map(([p,i])=>cardHTML(p,i)).join('');
+  observe();
 }
-renderProjects();
+render();
 
-el('proj-filters').addEventListener('click', ev=>{
-  const b = ev.target.closest('.f-btn'); if(!b) return;
-  el('proj-filters').querySelectorAll('.f-btn').forEach(x=>x.classList.remove('on'));
-  b.classList.add('on');
-  renderProjects(b.dataset.filter);
+filters.addEventListener('click',e=>{
+  const b=e.target.closest('.chip'); if(!b)return;
+  active=b.dataset.cat;
+  [...filters.children].forEach(c=>c.setAttribute('aria-pressed',String(c===b)));
+  render();
 });
 
-el('gallery-grid').innerHTML = GALLERY.map((g,i)=>{
-  const src = img(g.key);
-  return `<figure class="gal-item reveal" data-lb="${i}">
-    ${src?`<img src="${src}" alt="${esc(g.cap)}" loading="lazy">`
-         :`<div class="gal-fallback">${esc(g.cap)}</div>`}
-    <figcaption>${esc(g.cap)}</figcaption></figure>`;}).join('');
+document.getElementById('skills-grid').innerHTML=SKILLS.map(([n,l,v,w])=>
+ `<div class="skill reveal"><div class="skill-top"><span class="skill-name">${esc(n)}</span>
+  <span class="skill-lvl">${esc(l)}</span></div><div class="bar"><i data-w="${v}"></i></div>
+  <small>${esc(w)}</small></div>`).join('');
 
-el('edu-grid').innerHTML = education.map(e=>`
-  <div class="edu reveal">
-    <div class="yr">${esc(e.yr)}</div>
-    <h3>${esc(e.school)}</h3>
-    <div class="deg">${esc(e.deg)}</div>
-    <div class="fld">${esc(e.fld)}</div>
-  </div>`).join('');
+/* ============================ modal ============================ */
+const modal=document.getElementById('modal'), sheetTitle=document.getElementById('sheet-title'),
+      sheetBody=document.getElementById('sheet-body');
+let lastFocus=null;
 
-el('award-grid').innerHTML = awards.map(a=>{
-  const src = img(AWARD_IMG_KEY[a.title]);
-  return `<div class="award reveal">
-    ${src?`<div class="award-img" data-lbsrc="${src}" data-lbcap="${esc(a.title)}"><img src="${src}" alt="${esc(a.title)}" loading="lazy"></div>`:''}
-    <div class="award-body">
-      <span class="yr">${esc(a.yr)}</span>
-      <div class="ic">${a.ic}</div>
-      <h3>${esc(a.title)}</h3>
-      <p><strong style="color:var(--muted)">${esc(a.org)}</strong> — ${esc(a.desc)}</p>
-    </div>
-  </div>`;}).join('');
-
-el('skill-cats').innerHTML = skillCats.map(c=>`
-  <div class="skill-cat reveal">
-    <h4>${esc(c.h)}</h4>
-    ${c.items.map(([n,v])=>`
-      <div class="skill-row">
-        <div class="skill-top"><span>${esc(n)}</span><span class="lvl">${v}</span></div>
-        <div class="skill-track"><div class="skill-fill" data-w="${v}"></div></div>
-      </div>`).join('')}
-  </div>`).join('');
-
-el('cert-grid').innerHTML = certs.map(c=>`
-  <div class="cert reveal">
-    ${certLogo(c.iss)
-      ? `<img class="cert-logo" src="${certLogo(c.iss)}" alt="${esc(c.iss)}" loading="lazy">`
-      : `<div class="cert-fallback">✦</div>`}
-    <div style="min-width:0">
-      <h4>${esc(c.t)}</h4>
-      <div class="iss">${esc(c.iss)}</div>
-      <div class="dt">${esc(c.dt)}</div>
-    </div>
-  </div>`).join('');
-
-el('yr').textContent = new Date().getFullYear();
-
-/* ─────────────────────────  HERO BANNER  ───────────────────────── */
-if(img('banner')){
-  const h = document.querySelector('.hero');
-  const b = document.createElement('div');
-  b.style.cssText = "position:absolute;inset:-66px 0 auto 0;height:560px;background-size:cover;"+
-    "background-position:center;opacity:.34;z-index:-1;"+
-    "mask-image:linear-gradient(180deg,#000 18%,transparent 96%);"+
-    "-webkit-mask-image:linear-gradient(180deg,#000 18%,transparent 96%);";
-  b.style.backgroundImage = `url('${img('banner')}')`;
-  h.prepend(b);
+function openProject(i){
+  const p=P[i]; lastFocus=document.activeElement;
+  sheetTitle.textContent=p.title;
+  const kv=`<dl class="kv">${p.kv.map(([k,v])=>`<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl>`;
+  const figs=p.figs.length?`<div class="figrow">${p.figs.map(([src,cap])=>
+      `<figure class="fig" data-full="${src}" data-cap="${esc(cap)}"><img src="${src}" alt="${esc(cap)}" loading="lazy">
+       <figcaption>${esc(cap)}</figcaption></figure>`).join('')}</div>`:'';
+  const links=`<h4>Read more</h4><div class="cta">${p.links.map(([l,u])=>
+      `<a class="btn btn-ghost" href="${u.trim()}">${esc(l)}</a>`).join('')}</div>`;
+  sheetBody.innerHTML=`<p class="mono" style="color:var(--ink-3)">${esc(p.when)}</p>${kv}${p.body}${figs}${links}`;
+  modal.hidden=false; document.body.style.overflow='hidden';
+  modal.querySelector('[data-close]').focus();
 }
+function closeModal(){modal.hidden=true;document.body.style.overflow='';if(lastFocus)lastFocus.focus()}
+grid.addEventListener('click',e=>{const c=e.target.closest('.card');if(c)openProject(+c.dataset.i)});
+modal.addEventListener('click',e=>{if(e.target.closest('[data-close]'))closeModal()});
 
-/* ─────────────────────────  NAV / PROGRESS  ───────────────────────── */
-const nav = el('nav'), menu = el('menu'), burger = el('burger'), progress = el('progress');
-addEventListener('scroll', ()=>{
-  nav.classList.toggle('scrolled', scrollY > 20);
-  const h = document.documentElement.scrollHeight - innerHeight;
-  progress.style.width = (h>0 ? (scrollY/h)*100 : 0) + '%';
-}, {passive:true});
-burger.addEventListener('click', ()=>menu.classList.toggle('open'));
-menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>menu.classList.remove('open')));
-
-/* active section highlight */
-const navLinks = [...menu.querySelectorAll('a[href^="#"]')];
-const secObs = new IntersectionObserver(es=>{
-  es.forEach(e=>{
-    if(!e.isIntersecting) return;
-    navLinks.forEach(a=>a.classList.toggle('active', a.getAttribute('href') === '#'+e.target.id));
-  });
-},{rootMargin:'-45% 0px -50% 0px'});
-['research','about','experience','projects','gallery','skills','contact']
-  .forEach(id=>{ const n = el(id); if(n) secObs.observe(n); });
-
-/* ─────────────────────────  REVEAL  ───────────────────────── */
-/* observeReveals() is defined near the top; this sweeps everything
-   rendered since the last call. */
-observeReveals();
-
-/* ─────────────────────────  COUNTERS  ───────────────────────── */
-const countObs = new IntersectionObserver((entries, obs)=>{
-  entries.forEach(entry=>{
-    if(!entry.isIntersecting) return;
-    const node = entry.target, end = +node.dataset.count, dur = 1250;
-    const t0 = performance.now();
-    (function step(t){
-      const p = Math.min((t - t0) / dur, 1);
-      node.textContent = Math.round(end * (1 - Math.pow(1 - p, 3)));
-      if(p < 1) requestAnimationFrame(step);
-    })(t0);
-    obs.unobserve(node);
-  });
-},{threshold:.6});
-document.querySelectorAll('[data-count]').forEach(n=>countObs.observe(n));
-
-/* ─────────────────────────  BARS  ───────────────────────── */
-const barObs = new IntersectionObserver((es,o)=>{
-  es.forEach(e=>{
-    if(!e.isIntersecting) return;
-    e.target.querySelectorAll('[data-w]').forEach((b,i)=>
-      setTimeout(()=>{ b.style.width = b.dataset.w + '%'; }, i*110));
-    o.unobserve(e.target);
-  });
-},{threshold:.35});
-document.querySelectorAll('[data-chart], .skill-cat').forEach(n=>barObs.observe(n));
-
-/* ─────────────────────────  TABS  ───────────────────────── */
-document.querySelectorAll('.tab').forEach(t=>{
-  t.addEventListener('click', ()=>{
-    document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));
-    document.querySelectorAll('.panel').forEach(x=>x.classList.remove('on'));
-    t.classList.add('on');
-    const p = el('p-'+t.dataset.tab);
-    p.classList.add('on');
-    observeReveals();
-    p.querySelectorAll('[data-chart], .skill-cat').forEach(n=>{
-      n.querySelectorAll('[data-w]').forEach((b,i)=>{
-        b.style.width = '0';
-        setTimeout(()=>{ b.style.width = b.dataset.w + '%'; }, 60 + i*110);
-      });
-    });
-  });
+/* ============================ lightbox ============================ */
+const lb=document.getElementById('lightbox'), lbImg=document.getElementById('lb-img'), lbCap=document.getElementById('lb-cap');
+document.addEventListener('click',e=>{
+  const f=e.target.closest('.fig'); if(!f)return;
+  lbImg.src=f.dataset.full; lbImg.alt=f.dataset.cap||''; lbCap.textContent=f.dataset.cap||'';
+  lb.hidden=false;
+});
+lb.addEventListener('click',()=>lb.hidden=true);
+document.addEventListener('keydown',e=>{
+  if(e.key!=='Escape')return;
+  if(!lb.hidden){lb.hidden=true;return}
+  if(!modal.hidden)closeModal();
 });
 
-/* ─────────────────────────  LIGHTBOX  ───────────────────────── */
-const lb = el('lb'), lbImg = el('lb-img'), lbCap = el('lb-cap');
-let lbList = [], lbIdx = 0;
-function openLB(list, i){
-  lbList = list; lbIdx = i;
-  if(!lbList.length || !lbList[i].src) return;
-  lbImg.src = lbList[i].src; lbCap.textContent = lbList[i].cap;
-  lb.classList.add('open'); document.body.classList.add('noscroll');
+/* ============================ theme ============================ */
+const root=document.documentElement, tbtn=document.getElementById('theme');
+try{const saved=localStorage.getItem('theme'); if(saved)root.setAttribute('data-theme',saved)}catch(_){}
+tbtn.addEventListener('click',()=>{
+  const cur=root.getAttribute('data-theme');
+  const sysDark=window.matchMedia('(prefers-color-scheme:dark)').matches;
+  const next=cur? (cur==='dark'?'light':'dark') : (sysDark?'light':'dark');
+  root.setAttribute('data-theme',next);
+  try{localStorage.setItem('theme',next)}catch(_){}
+});
+
+/* ============================ nav ============================ */
+const menubtn=document.getElementById('menubtn'), navlinks=document.getElementById('navlinks');
+function syncNav(){ if(window.innerWidth<=860){navlinks.hidden=true;menubtn.setAttribute('aria-expanded','false')} else navlinks.hidden=false }
+syncNav(); window.addEventListener('resize',syncNav);
+menubtn.addEventListener('click',()=>{
+  const open=navlinks.hidden; navlinks.hidden=!open; menubtn.setAttribute('aria-expanded',String(open));
+});
+navlinks.addEventListener('click',e=>{if(e.target.tagName==='A'&&window.innerWidth<=860)syncNav()});
+
+const secs=[...document.querySelectorAll('main section[id]')];
+const navmap=new Map([...navlinks.querySelectorAll('a')].map(a=>[a.getAttribute('href').slice(1),a]));
+new IntersectionObserver(es=>{es.forEach(e=>{
+  const a=navmap.get(e.target.id); if(!a)return;
+  if(e.isIntersecting){navmap.forEach(x=>x.classList.remove('active'));a.classList.add('active')}
+})},{rootMargin:'-45% 0px -50% 0px'}).observe&&secs.forEach(s=>{
+  new IntersectionObserver(es=>{es.forEach(e=>{const a=navmap.get(e.target.id);if(!a)return;
+    if(e.isIntersecting){navmap.forEach(x=>x.classList.remove('active'));a.classList.add('active')}})},
+    {rootMargin:'-45% 0px -50% 0px'}).observe(s)});
+
+/* ============================ reveal + bars ============================ */
+function observe(){
+  if(!('IntersectionObserver' in window)){document.querySelectorAll('.reveal').forEach(e=>e.classList.add('in'));return}
+  io=io||new IntersectionObserver(es=>es.forEach(e=>{
+    if(!e.isIntersecting)return;
+    e.target.classList.add('in');
+    e.target.querySelectorAll?.('.bar i').forEach(b=>b.style.width=b.dataset.w+'%');
+    io.unobserve(e.target);
+  }),{threshold:.12});
+  document.querySelectorAll('.reveal:not(.in)').forEach(e=>io.observe(e));
 }
-function stepLB(d){
-  if(!lbList.length) return;
-  lbIdx = (lbIdx + d + lbList.length) % lbList.length;
-  lbImg.src = lbList[lbIdx].src; lbCap.textContent = lbList[lbIdx].cap;
-}
-function closeLB(){ lb.classList.remove('open'); document.body.classList.remove('noscroll'); }
-el('lb-close').addEventListener('click', closeLB);
-el('lb-prev').addEventListener('click', e=>{e.stopPropagation();stepLB(-1);});
-el('lb-next').addEventListener('click', e=>{e.stopPropagation();stepLB(1);});
-lb.addEventListener('click', e=>{ if(e.target===lb) closeLB(); });
-
-el('gallery-grid').addEventListener('click', e=>{
-  const f = e.target.closest('[data-lb]'); if(!f) return;
-  const list = GALLERY.map(g=>({src:img(g.key), cap:g.cap})).filter(x=>x.src);
-  const key = GALLERY[+f.dataset.lb].key;
-  const i = list.findIndex(x=>x.src === img(key));
-  if(i>=0) openLB(list, i);
+observe();
+document.querySelectorAll('.skill').forEach(s=>{ // bars inside skill cards
+  new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){
+    const b=e.target.querySelector('.bar i'); if(b)b.style.width=b.dataset.w+'%';}}),{threshold:.3}).observe(s);
 });
-el('award-grid').addEventListener('click', e=>{
-  const a = e.target.closest('[data-lbsrc]'); if(!a) return;
-  openLB([{src:a.dataset.lbsrc, cap:a.dataset.lbcap}], 0);
-});
-
-/* ─────────────────────────  COPY EMAIL  ───────────────────────── */
-el('copyEmail').addEventListener('click', function(){
-  const mail = this.dataset.mail, orig = this.innerHTML;
-  navigator.clipboard?.writeText(mail).then(()=>{
-    this.innerHTML = '✓ Copied to clipboard';
-    setTimeout(()=>{ this.innerHTML = orig; }, 1700);
-  }).catch(()=>{ location.href = 'mailto:'+mail; });
-});
-
-/* ─────────────────────────  ROTATING ROLE  ───────────────────────── */
-const ROLES = [
-  "Flight Control & Systems Engineering",
-  "UAV Systems · concept to flight test",
-  "SIL / HIL & Iron-Bird Validation",
-  "Verified Physics-Informed Surrogates",
-  "Published researcher · fully open code"
-];
-(function typeRoles(){
-  const node = el('roletext');
-  if(matchMedia('(prefers-reduced-motion: reduce)').matches){ node.textContent = ROLES[0]; return; }
-  let r = 0, c = 0, del = false;
-  (function tick(){
-    const s = ROLES[r];
-    node.textContent = del ? s.slice(0, --c) : s.slice(0, ++c);
-    let wait = del ? 26 : 52;
-    if(!del && c === s.length){ wait = 1900; del = true; }
-    else if(del && c === 0){ del = false; r = (r+1) % ROLES.length; wait = 320; }
-    setTimeout(tick, wait);
-  })();
-})();
-
-/* ─────────────────────────  COMMAND PALETTE  ───────────────────────── */
-const CMDS = [
-  {ic:"◆", t:"Research — the publication", s:"01", go:()=>jump('#research')},
-  {ic:"◆", t:"About", s:"02", go:()=>jump('#about')},
-  {ic:"◆", t:"Experience", s:"03", go:()=>jump('#experience')},
-  {ic:"◆", t:"Projects", s:"04", go:()=>jump('#projects')},
-  {ic:"◆", t:"Flight hardware gallery", s:"05", go:()=>jump('#gallery')},
-  {ic:"◆", t:"Education", s:"06", go:()=>jump('#education')},
-  {ic:"◆", t:"Awards", s:"07", go:()=>jump('#awards')},
-  {ic:"◆", t:"Skills", s:"08", go:()=>jump('#skills')},
-  {ic:"◆", t:"Certifications", s:"09", go:()=>jump('#certs')},
-  {ic:"✉", t:"Copy email address", s:"copy", go:()=>{
-      navigator.clipboard?.writeText('hassaanshahid97@gmail.com'); jump('#contact'); }},
-  {ic:"↗", t:"Open the preprint (Zenodo DOI)", s:"doi",
-    go:()=>open('https://doi.org/10.5281/zenodo.21788995','_blank')},
-  {ic:"↗", t:"Open the research code on GitHub", s:"repo",
-    go:()=>open('https://github.com/hassaanshahid97-cyber/scramjet-pinn-surrogate','_blank')},
-  {ic:"↗", t:"LinkedIn profile", s:"in",
-    go:()=>open('https://www.linkedin.com/in/hassaan-shahid-b1b285280','_blank')},
-  {ic:"↗", t:"ORCID 0009-0003-7403-8933", s:"orcid",
-    go:()=>open('https://orcid.org/0009-0003-7403-8933','_blank')},
-  {ic:"⎙", t:"Print / save this page as PDF", s:"print", go:()=>print()}
-];
-const back = el('cmdk-back'), input = el('cmdk-input'), list = el('cmdk-list');
-let sel = 0, filtered = CMDS;
-function jump(h){ closeCmd(); el(h.slice(1))?.scrollIntoView({behavior:'smooth'}); }
-function drawCmd(){
-  list.innerHTML = filtered.length
-    ? filtered.map((c,i)=>`<div class="cmdk-item${i===sel?' sel':''}" data-i="${i}">
-        <span class="ic">${c.ic}</span><span>${esc(c.t)}</span><span class="sub">${esc(c.s)}</span></div>`).join('')
-    : `<div class="cmdk-empty">Nothing matched that.</div>`;
-}
-function openCmd(){ back.classList.add('open'); document.body.classList.add('noscroll');
-  input.value=''; filtered=CMDS; sel=0; drawCmd(); setTimeout(()=>input.focus(),40); }
-function closeCmd(){ back.classList.remove('open'); document.body.classList.remove('noscroll'); }
-el('cmdk-open').addEventListener('click', openCmd);
-back.addEventListener('click', e=>{ if(e.target===back) closeCmd(); });
-input.addEventListener('input', ()=>{
-  const q = input.value.toLowerCase().trim();
-  filtered = q ? CMDS.filter(c=>(c.t+' '+c.s).toLowerCase().includes(q)) : CMDS;
-  sel = 0; drawCmd();
-});
-list.addEventListener('click', e=>{
-  const it = e.target.closest('.cmdk-item'); if(!it) return;
-  filtered[+it.dataset.i].go();
-});
-addEventListener('keydown', e=>{
-  if((e.metaKey||e.ctrlKey) && e.key.toLowerCase()==='k'){ e.preventDefault(); openCmd(); return; }
-  if(e.key==='Escape'){ closeCmd(); closeLB(); menu.classList.remove('open'); return; }
-  if(lb.classList.contains('open')){
-    if(e.key==='ArrowRight') stepLB(1);
-    if(e.key==='ArrowLeft')  stepLB(-1);
-    return;
-  }
-  if(!back.classList.contains('open')) return;
-  if(e.key==='ArrowDown'){ e.preventDefault(); sel=Math.min(sel+1,filtered.length-1); drawCmd(); }
-  if(e.key==='ArrowUp'){   e.preventDefault(); sel=Math.max(sel-1,0); drawCmd(); }
-  if(e.key==='Enter' && filtered[sel]) filtered[sel].go();
-});
-
-/* ─────────────────────────  FLOW FIELD BACKDROP  ───────────────────────── */
-(function flowField(){
-  if(matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  const cv = el('flow'), ctx = cv.getContext('2d');
-  let W, H, dpr, parts = [], running = true;
-
-  function size(){
-    dpr = Math.min(devicePixelRatio||1, 2);
-    W = cv.width  = innerWidth  * dpr;
-    H = cv.height = innerHeight * dpr;
-    cv.style.width = innerWidth+'px';
-    cv.style.height = innerHeight+'px';
-  }
-  function seed(){
-    const n = innerWidth < 700 ? 55 : 130;
-    parts = Array.from({length:n}, ()=>({
-      x: Math.random()*W, y: Math.random()*H,
-      vx: 0, vy: 0, life: Math.random()*220
-    }));
-  }
-  // cheap smooth pseudo-noise → curl-ish streamlines
-  const ang = (x,y,t)=>
-    Math.sin(x*0.0016 + t*0.00016) * 1.6 +
-    Math.cos(y*0.0021 - t*0.00021) * 1.6 +
-    Math.sin((x+y)*0.0009 + t*0.00011) * 1.1;
-
-  function frame(t){
-    if(!running){ requestAnimationFrame(frame); return; }
-    ctx.fillStyle = 'rgba(8,11,17,0.055)';
-    ctx.fillRect(0,0,W,H);
-    for(const p of parts){
-      const a = ang(p.x, p.y, t);
-      p.vx = p.vx*0.86 + Math.cos(a)*0.55*dpr;
-      p.vy = p.vy*0.86 + Math.sin(a)*0.55*dpr;
-      const px = p.x, py = p.y;
-      p.x += p.vx; p.y += p.vy; p.life--;
-      if(p.life<0 || p.x<0 || p.x>W || p.y<0 || p.y>H){
-        p.x = Math.random()*W; p.y = Math.random()*H;
-        p.vx = p.vy = 0; p.life = 160 + Math.random()*240;
-        continue;
-      }
-      const fade = Math.min(p.life/90, 1);
-      ctx.strokeStyle = `rgba(61,214,208,${0.13*fade})`;
-      ctx.lineWidth = 1*dpr;
-      ctx.beginPath(); ctx.moveTo(px,py); ctx.lineTo(p.x,p.y); ctx.stroke();
-    }
-    requestAnimationFrame(frame);
-  }
-  size(); seed();
-  ctx.fillStyle = '#080b11'; ctx.fillRect(0,0,W,H);
-  requestAnimationFrame(frame);
-
-  let rz; addEventListener('resize', ()=>{ clearTimeout(rz);
-    rz = setTimeout(()=>{ size(); seed(); }, 220); }, {passive:true});
-  addEventListener('scroll', ()=>{ running = scrollY < innerHeight*1.3; }, {passive:true});
-  document.addEventListener('visibilitychange', ()=>{ running = !document.hidden && scrollY < innerHeight*1.3; });
-})();
+setTimeout(()=>document.querySelectorAll('.reveal:not(.in)').forEach(e=>e.classList.add('in')),2500);
+document.getElementById('yr').textContent=new Date().getFullYear();
 </script>
 </body>
 </html>
