@@ -7,7 +7,7 @@
 <meta name="description" content="M.Sc. Aeronautical Engineering at Linkoping University. Scientific machine learning, CFD, aircraft conceptual design and UAV flight systems. Available for a 30 hp master thesis, January to June 2027.">
 <meta name="author" content="Hassaan Shahid">
 <meta property="og:title" content="Hassaan Shahid | Aeronautical Engineer">
-<meta property="og:description" content="Sole-authored preprint in physics-informed machine learning. CFD, aircraft design and UAV flight systems. Available for a 30 hp master thesis, January to June 2027.">
+<meta property="og:description" content="Two sole-authored papers on trusting models in thermal and propulsion decisions, one under review. CFD, aircraft design and UAV flight systems. Available for a 30 hp master thesis, January to June 2027.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://hassaanshahid97-cyber.github.io">
 <meta property="og:image" content="https://hassaanshahid97-cyber.github.io/images/profile.jpg">
@@ -283,7 +283,7 @@ footer{border-top:1px solid var(--line);padding-block:28px;color:var(--ink-3);fo
       <p class="role">M.Sc. Aeronautical Engineering, <b>Linköping University</b> · Linköping, Sweden</p>
       <p class="lede">I build the loop that turns physics into a decision you can defend: a verified PDE
       forward model, a surrogate fast enough to sit inside a control law, and a calibrated bound on how
-      far that surrogate can be trusted. Sole-authored preprint in physics-informed machine learning.
+      far that surrogate can be trusted. Two sole-authored papers, one under review at Engineering Applications of Artificial Intelligence and one in preparation for the AIAA Journal of Guidance, Control, and Dynamics.
       Team captain of Linköping University's SAE AeroDesign team.</p>
       <div class="cta">
         <a class="btn btn-primary" href="#work">See the work</a>
@@ -304,7 +304,7 @@ footer{border-top:1px solid var(--line);padding-block:28px;color:var(--ink-3);fo
   </div>
 
   <div class="stats" style="margin-top:38px">
-    <div class="stat reveal"><b data-count="1">1</b><span>Sole-authored preprint, submitted Aug 2026</span></div>
+    <div class="stat reveal"><b data-count="2">2</b><span>Sole-authored papers: one under review, one in preparation</span></div>
     <div class="stat reveal"><b data-count="45" data-suffix="×">45×</b><span>Seed-to-seed error variance cut by the physics residual</span></div>
     <div class="stat reveal"><b data-count="3.2" data-suffix="M">3.2M</b><span>Element near-wall RANS mesh at y+ &lt; 5</span></div>
     <div class="stat reveal"><b data-count="104" data-suffix="/104">104/104</b><span>Manuscript claims machine-audited against stored results</span></div>
@@ -315,21 +315,23 @@ footer{border-top:1px solid var(--line);padding-block:28px;color:var(--ink-3);fo
 <section id="research">
   <div class="wrap">
     <p class="eyebrow">Research</p>
-    <h2 class="sec-title">How wrong is a fast surrogate allowed to be?</h2>
-    <p class="sec-lede">A physics-informed surrogate is easy to demonstrate and hard to qualify. This study
-    answers the two questions that decide whether one is usable: how much of the reported accuracy
-    survives a change of random seed, and how large an error allowance a decision rule needs to stay safe.</p>
+    <h2 class="sec-title">When can a model be trusted to make the decision?</h2>
+    <p class="sec-lede">Two studies, one question. In both, a model sits inside a decision that keeps hot
+    hardware safe: a coolant scheduler for a scramjet wall, and entry guidance for a re-entry heat shield.
+    The method is the same each time: verify the physics against exact references, test the model in the role
+    it will actually play, calibrate its error where the decision is made, and report what does not work.</p>
 
     <div class="feature">
       <div class="feature-head">
-        <h3>Seed variability and calibrated error bounds for physics-informed conjugate heat transfer surrogates</h3>
+        <h3>Paper 1. Seed variance and calibrated constraint bounds for physics-informed surrogates in thermal decision loops</h3>
         <div style="display:flex;gap:8px;flex-wrap:wrap">
           <a class="btn btn-ghost" href="https://doi.org/10.5281/zenodo.21788995">Preprint</a>
           <a class="btn btn-ghost" href="https://github.com/hassaanshahid97-cyber/scramjet-pinn-surrogate">Code</a>
         </div>
       </div>
       <p style="color:var(--ink-2);margin:0">Sole-authored, written and executed independently over one
-      summer. Submitted to a peer-reviewed journal in August 2026, not yet reviewed. Code, data, figures
+      summer. Under review at Engineering Applications of Artificial Intelligence (Elsevier); the Zenodo preprint
+      carries the earlier working title. Code, data, figures
       and an audit script released under MIT; the manuscript under CC BY 4.0. The whole study reproduces
       from a clean checkout in under two core-hours.</p>
 
@@ -340,8 +342,8 @@ footer{border-top:1px solid var(--line);padding-block:28px;color:var(--ink-3);fo
         <div class="finding"><b>Finding 2</b><p>It <b>collapses run-to-run variance</b>, seed standard
           deviation of field RMSE from 12.42 K to 0.27 K. A single-seed study cannot see this.</p></div>
         <div class="finding"><b>Finding 3</b><p>An <b>accurate surrogate is not a safe one</b>. As a hard
-          constraint it broke the structural limit on 14.4 per cent of manoeuvres; a split-conformal
-          allowance restored the nominal 5 per cent.</p></div>
+          constraint it broke the structural limit on 14.4 per cent of manoeuvres, because the optimiser seeks out
+          the surrogate's optimistic errors; a split-conformal allowance brought this to 5.8 per cent against a 5 per cent target.</p></div>
         <div class="finding neg"><b>Where it loses</b><p>Reported because it is what the experiment shows:
           given 24 reference solutions, a plain supervised model was twice as accurate in-envelope.</p></div>
       </div>
@@ -360,6 +362,32 @@ footer{border-top:1px solid var(--line);padding-block:28px;color:var(--ink-3);fo
           <figcaption><b>Calibrated in closed loop.</b> Violation rate measured with the surrogate driving the decision, not assumed.</figcaption>
         </figure>
       </div>
+
+    </div>
+    <div class="feature" style="margin-top:20px">
+      <div class="feature-head">
+        <h3>Paper 2. Bondline-temperature-constrained entry guidance from the heat-load-optimal drag profile</h3>
+      </div>
+      <p style="color:var(--ink-2);margin:0">Sole-authored, in preparation for the AIAA Journal of Guidance, Control,
+      and Dynamics. On a Shuttle-class vehicle the tiles must keep the aluminium structure below 449.8 K, and the structure
+      peaks near landing, long after guidance has finished. I derived the drag profile that gives the least heat load for a
+      fixed landing site and built a guidance law on it that selects the lowest load factor keeping the structure inside the limit.</p>
+      <div class="findings">
+        <div class="finding"><b>Finding 1</b><p>The structure can start <b>8 K warmer with a 2 g limit, or 12 K
+          warmer with 2.5 g</b>, and still stay below 449.8 K in closed-loop flights to Edwards AFB.</p></div>
+        <div class="finding"><b>Finding 2</b><p>Over <b>1000 simulated flights</b> with model uncertainty, the share
+          that exceeded the limit fell from 5.8 per cent to 3.4 per cent at 2 g and to 2.5 per cent at 2.5 g.</p></div>
+        <div class="finding"><b>Finding 3</b><p>A <b>two-term heat-load formula</b> came within 1.3 K of the full
+          model, so no neural network was needed, and the conformal margin held 0.952 coverage under guidance feedback.</p></div>
+        <div class="finding neg"><b>Where it loses</b><p>At a fixed landing site guidance has little authority over the
+          temperature rise. Most of the remaining risk comes from tile material properties, so the margin has to come from design.</p></div>
+      </div>
+      <div class="figrow">
+        <figure class="fig" style="max-width:440px" data-full="figures/reentry/tile-stack.png" data-cap="Tile stack modelled in Paper 2: LI-900 tile sized at 22.8 mm, felt pad and aluminium structure with a 449.8 K limit, heated through entry and a 3-hour soak.">
+          <img src="figures/reentry/tile-stack.png" alt="Schematic of the heat-shield tile stack" loading="lazy">
+          <figcaption><b>Verified first.</b> Entry dynamics checked against NASA's reference trajectory (1262 s against 1254 s); conduction orders 2.0 and 0.99.</figcaption>
+        </figure>
+      </div>
     </div>
   </div>
 </section>
@@ -368,7 +396,7 @@ footer{border-top:1px solid var(--line);padding-block:28px;color:var(--ink-3);fo
 <section id="work">
   <div class="wrap">
     <p class="eyebrow">Selected work</p>
-    <h2 class="sec-title">Fifteen projects, and what came out of each</h2>
+    <h2 class="sec-title">Sixteen projects, and what came out of each</h2>
     <p class="sec-lede">Filter by discipline. Open a card for the method, the numbers and the figures.
     Every project links to a full case study with setup, verification, results and limitations.</p>
 
@@ -386,12 +414,12 @@ footer{border-top:1px solid var(--line);padding-block:28px;color:var(--ink-3);fo
 <section id="thesis">
   <div class="wrap">
     <p class="eyebrow">Master thesis, 30 hp</p>
-    <h2 class="sec-title">January to June 2027. Here is where I would fit.</h2>
+    <h2 class="sec-title">From January 2027. Here is where I would fit.</h2>
     <p class="sec-lede">Each direction states what I have already done and what I would have to ramp up in
     the first weeks. No direction claims readiness I cannot evidence.</p>
 
     <dl class="facts">
-      <div><dt>Period</dt><dd>Jan to Jun 2027, full time, 20 weeks</dd></div>
+      <div><dt>Period</dt><dd>From Jan 2027, full time, 20 weeks</dd></div>
       <div><dt>Location</dt><dd>Linköping, mobile across Sweden and Denmark</dd></div>
       <div><dt>Language</dt><dd>English C1, IELTS 7.5. Swedish A2, studying SFI</dd></div>
       <div><dt>Confidentiality</dt><dd>Willing to work under NDA, redacted thesis if required</dd></div>
@@ -400,35 +428,35 @@ footer{border-top:1px solid var(--line);padding-block:28px;color:var(--ink-3);fo
     <div class="th-grid">
       <article class="th reveal">
         <span class="num">Direction 01</span>
-        <h3>Scientific ML for physics-informed inverse problems</h3>
-        <p style="color:var(--ink-2);font-size:14.4px;margin:0">SAR imaging, electromagnetic scattering, non-destructive evaluation, any ill-posed reconstruction with a PDE forward model.</p>
+        <h3>Robust design margins and uncertainty quantification</h3>
+        <p style="color:var(--ink-2);font-size:14.4px;margin:0">Turning uncertainty into margins an optimiser respects, probabilistic and sensitivity analysis, robust design optimization, surrogate-assisted design.</p>
         <dl>
           <dt class="ready">Already done</dt>
-          <dd>Verified forward model, JAX surrogate with hard-constrained initial conditions and no loss-weight tuning, twelve replicated runs, split-conformal bound validated in closed loop.</dd>
+          <dd>Split-conformal margins validated in closed loop in two studies: 14.4 to 5.8 per cent violations, and 0.952 coverage over 1000 Monte Carlo flights. Seed-replicated experiments, differential evolution, sensitivity of outcome to each uncertainty.</dd>
           <dt class="ramp">Would ramp up</dt>
-          <dd>Electromagnetic scattering formulations and the SAR chain, regularisation theory beyond the CHT setting, GPU kernel programming.</dd>
+          <dd>Industrial robustness tools such as optiSLang, geometric and material scatter of manufactured components.</dd>
         </dl>
       </article>
       <article class="th reveal">
         <span class="num">Direction 02</span>
-        <h3>Surrogates and UQ for propulsion and thermal limits</h3>
-        <p style="color:var(--ink-2);font-size:14.4px;margin:0">Real-time limit protection, digital twins of hot structures, life usage monitoring, fast models inside a control loop.</p>
+        <h3>Gas turbine performance, test data and model-based correction</h3>
+        <p style="color:var(--ink-2);font-size:14.4px;margin:0">Performance calculation and correction, comparing thermodynamic models with test data, mission and cycle studies, low-order compressor models.</p>
         <dl>
           <dt class="ready">Already done</dt>
-          <dd>The preprint is this problem in miniature. Plus a Brayton cycle tool with compressor and turbine maps benchmarked against AMT Olympus HP 230N test data.</dd>
+          <dd>C++ and NPSS design and performance code benchmarked against AMT Olympus HP 230N test data; Turbo Machinery and Gas Turbine Engines; model against rig data on a real-time HIL rig.</dd>
           <dt class="ramp">Would ramp up</dt>
-          <dd>Industrial life and damage models; real-time and embedded deployment constraints beyond rig experience.</dd>
+          <dd>Field performance test procedures (ASME PTC 22, ISO 2314) in practice, industrial test databases, FMU-based engine models.</dd>
         </dl>
       </article>
       <article class="th reveal">
         <span class="num">Direction 03</span>
-        <h3>Machine learning applied to CFD</h3>
-        <p style="color:var(--ink-2);font-size:14.4px;margin:0">Reduced order models, data-driven turbulence closure augmentation, surrogate-assisted shape optimisation.</p>
+        <h3>CFD and heat transfer</h3>
+        <p style="color:var(--ink-2);font-size:14.4px;margin:0">Turbomachinery and cooling flows, conjugate heat transfer, CFD methodology and validation, reduced-order and ML-assisted models.</p>
         <dl>
           <dt class="ready">Already done</dt>
-          <dd>Steady RANS at Re 588,000 on a 3.2M element mesh at y+ &lt; 5, with model comparison and convergence studies, and the ML half from the preprint.</dd>
+          <dd>Steady RANS at Re 588,000 on a 3.2M element mesh at y+ &lt; 5; verified transient conduction solver for a 1 mm Inconel 718 wall; B.Sc. Heat Transfer, Thermodynamics and Compressible Aerodynamics with labs.</dd>
           <dt class="ramp">Would ramp up</dt>
-          <dd>Large CFD training data pipelines; adjoint methods, understood in principle but not implemented.</dd>
+          <dd>CFX and Star-CCM+, IR thermography and PIV in a lab, adjoint methods understood in principle but not implemented.</dd>
         </dl>
       </article>
       <article class="th reveal">
@@ -446,8 +474,8 @@ footer{border-top:1px solid var(--line);padding-block:28px;color:var(--ink-3);fo
 
     <div class="feature" style="margin-top:20px;border-left:3px solid var(--warn)">
       <h3 style="font-size:18px;margin-bottom:12px">What I am not claiming</h3>
-      <p style="margin:0;color:var(--ink-2);font-size:14.8px">I have not worked with SAR data or
-      electromagnetic solvers, have not written GPU kernels or run on an HPC cluster, my C++ is working
+      <p style="margin:0;color:var(--ink-2);font-size:14.8px">I have not used IR thermography, PIV or
+      electromagnetic solvers, have not taken part in an industrial field performance test, have not written GPU kernels or run on an HPC cluster, my C++ is working
       knowledge rather than production, I have not worked inside a certified aerospace software process,
       and my finite element work is coursework level while my finite volume work is not. Everything I do
       claim links to code, a manuscript, a report or a flying aircraft.</p>
@@ -469,7 +497,7 @@ footer{border-top:1px solid var(--line);padding-block:28px;color:var(--ink-3);fo
         <div class="tl-item"><div class="tl-when">Jun 2024 to Aug 2024</div>
           <div class="tl-what">Design Engineer, Simulation and Test</div>
           <div class="tl-where">NaqCoDE Technologies, Islamabad</div>
-          <div class="tl-note">Built a real-time hardware-in-the-loop and Iron Bird framework for validating autonomous UAV flight control.</div></div>
+          <div class="tl-note">Built a real-time hardware-in-the-loop and Iron Bird framework for validating autonomous UAV flight control, and traced each model-rig mismatch to its source. An anomaly detection pipeline across multiple sensor channels raised real-time processing accuracy by 77 per cent.</div></div>
         <div class="tl-item"><div class="tl-when">Sep 2024 to Jun 2025</div>
           <div class="tl-what">Teaching and Research Assistant</div>
           <div class="tl-where">Control Systems and Fluid Mechanics, Institute of Space Technology</div>
@@ -491,7 +519,7 @@ footer{border-top:1px solid var(--line);padding-block:28px;color:var(--ink-3);fo
         <div class="tl-item edu"><div class="tl-when">Sep 2021 to Jul 2025</div>
           <div class="tl-what">B.Sc. Aerospace Engineering, 240 ECTS</div>
           <div class="tl-where">Institute of Space Technology, Pakistan</div>
-          <div class="tl-note">CGPA 3.38 of 4.0. Numerical analysis, differential equations, linear algebra, control systems, flight control systems, spacecraft dynamics and control, rotorcraft dynamics, flight dynamics and stability, aerospace vehicle design.</div></div>
+          <div class="tl-note">CGPA 3.38 of 4.0. Heat transfer, thermodynamics, fluid mechanics, compressible aerodynamics and turbomachinery, with heat transfer, aerodynamics, propulsion and instrumentation labs. Numerical analysis, differential equations, linear algebra, control systems, flight control systems, spacecraft dynamics and control, rotorcraft dynamics, flight dynamics and stability, aerospace vehicle design.</div></div>
         <div class="tl-item edu"><div class="tl-when">Sep 2024 to Jul 2025</div>
           <div class="tl-what">Degree project, nominated Best Final Year Project</div>
           <div class="tl-where">Micro gas turbine design and performance code</div>
@@ -519,7 +547,8 @@ footer{border-top:1px solid var(--line);padding-block:28px;color:var(--ink-3);fo
     <h2 class="sec-title">Credentials, competitions and publications</h2>
     <div class="creds">
       <div class="cred"><h4>Publications and archives</h4><ul>
-        <li>Shahid, H. (2026). Seed variability and calibrated error bounds for physics-informed conjugate heat transfer surrogates. <a href="https://doi.org/10.5281/zenodo.21788995">Zenodo</a>. Sole-authored, submitted Aug 2026.</li>
+        <li>Shahid, H. (2026). Seed variance and calibrated constraint bounds for physics-informed surrogates in thermal decision loops. Under review, <i>Engineering Applications of Artificial Intelligence</i> (Elsevier). Preprint: <a href="https://doi.org/10.5281/zenodo.21788995">Zenodo</a>.</li>
+        <li>Shahid, H. (2026). Bondline-temperature-constrained entry guidance from the heat-load-optimal drag profile. In preparation for the <i>AIAA Journal of Guidance, Control, and Dynamics</i>.</li>
         <li>Shahid, H. and Sabir, M. B. (2025). Micro gas turbine design and performance code. <a href="https://doi.org/10.5281/zenodo.21805835">Zenodo</a>.</li>
         <li>ORCID <a href="https://orcid.org/0009-0003-7403-8933">0009-0003-7403-8933</a></li></ul></div>
       <div class="cred"><h4>Competitions</h4><ul>
@@ -547,7 +576,7 @@ footer{border-top:1px solid var(--line);padding-block:28px;color:var(--ink-3);fo
     <div class="contact">
       <h2>Looking for a thesis student from January 2027?</h2>
       <p>If the problem you have in mind involves a physics model, a surrogate and a decision that has to
-      be trusted, I would like to hear about it. Happy to send the CV, transcripts or the preprint, or to
+      be trusted, I would like to hear about it. Happy to send the CV, transcripts or either paper, or to
       talk it through on a call.</p>
       <div class="cta" style="justify-content:center">
         <a class="btn btn-primary" href="mailto:hassaanshahid97@gmail.com">hassaanshahid97@gmail.com</a>
@@ -587,18 +616,31 @@ const CATS=[['all','All'],['sciml','Scientific ML'],['cfd','CFD &amp; aero'],['d
 
 const P=[
 {id:'physics-informed-surrogates',cat:'sciml',title:'Physics-informed surrogates with calibrated error bounds',
- when:'Jun to Aug 2026 · sole-authored preprint',img:'figures/surrogates/hero.png',contain:true,
+ when:'Jun to Aug 2026 · sole-authored, under review at EAAI',img:'figures/surrogates/hero.png',contain:true,
  blurb:'A verified finite volume solver, four JAX surrogate configurations over three seeds each, and a split-conformal allowance validated inside a coolant scheduler.',
  tags:['JAX','PINN','conformal prediction','finite volume'],hi:0,
  kv:[['Variance cut','12.42 K → 0.27 K'],['Violation rate','14.4% → 5.8%'],['Claims audited','104 / 104'],['Reproduces in','< 2 core-hours']],
  body:`<h4>The question</h4><p>Two questions decide whether a surrogate is usable rather than merely demonstrable, and both are routinely unanswered: how much of the reported accuracy survives a change of random seed, and how large an error allowance a decision rule needs to stay safe.</p>
  <h4>Method</h4><ul><li>Finite volume reference solver with temperature-dependent conductivity and specific heat</li><li>Verified twice: exact Kirchhoff solution to 7.3e-10 K, and manufactured solutions at observed order 2.00 spatial, 0.95 temporal</li><li>Four configurations at identical architecture (7,345 parameters) and budget (1,500 Adam + 300 L-BFGS), three seeds each</li><li>Surrogate used as a hard inequality constraint in a coolant scheduler, then calibrated</li></ul>
- <h4>Results</h4><ul><li>The residual substitutes for data: with zero reference solutions it beats a supervised model given four</li><li>Seed standard deviation of field RMSE falls from 12.42 K to 0.27 K, a factor of about 45</li><li>Used directly as a constraint it violated the limit on 14.4 per cent of manoeuvres. A split-conformal allowance restored the nominal 5 per cent, at 5.8</li><li>Calibrated allowance varies by a factor of 15 across surrogates of identical architecture, so it is a property of the trained model and must be measured</li><li>Reported honestly: given 24 reference solutions, plain supervised training was twice as accurate in-envelope</li></ul>
+ <h4>Results</h4><ul><li>The residual substitutes for data: with zero reference solutions it beats a supervised model given four</li><li>Seed standard deviation of field RMSE falls from 12.42 K to 0.27 K, a factor of about 45</li><li>Used directly as a constraint it violated the limit on 14.4 per cent of manoeuvres. A split-conformal allowance brought it to 5.8 per cent against a 5 per cent target</li><li>Calibrated allowance varies by a factor of 15 across surrogates of identical architecture, so it is a property of the trained model and must be measured</li><li>Reported honestly: given 24 reference solutions, plain supervised training was twice as accurate in-envelope</li></ul>
  <h4>Figures</h4>`,
  figs:[['figures/surrogates/fig_surrogate.png','Surrogate prediction against the reference solver'],
        ['figures/surrogates/fig_control.png','Structural margin against coolant setting. More coolant is not automatically safer: the feasible set is an interval, not a half-line'],
        ['figures/surrogates/fig_reference.png','A representative reference solution: commanded flux, through-thickness temperature evolution, peak stress and margin']],
  links:[['Full case study',REPO+'physics-informed-surrogates.md'],['Code',' https://github.com/hassaanshahid97-cyber/scramjet-pinn-surrogate'],['Preprint DOI','https://doi.org/10.5281/zenodo.21788995']]},
+
+{id:'reentry-guidance',cat:'sciml',title:'Bondline-temperature-constrained entry guidance',
+ when:'2026 · sole-authored, in preparation for AIAA JGCD',img:'figures/reentry/tile-stack.png',contain:true,
+ blurb:'A Shuttle-class re-entry model built from public NASA data, a heat-load-optimal drag profile, and a guidance law that keeps the aluminium structure below 449.8 K, tested over 1000 Monte Carlo flights.',
+ tags:['3-DOF dynamics','guidance','conduction','Monte Carlo','conformal margin'],hi:0,
+ kv:[['Overheat risk, 2 g','5.8% → 3.4%'],['Overheat risk, 2.5 g','5.8% → 2.5%'],['Warmer start tolerated','8 K / 12 K'],['Conformal coverage','0.952']],
+ body:`<h4>The question</h4><p>Heat-shield tiles are sized so the aluminium under them stays below 449.8 K, and that temperature peaks near landing, long after guidance has finished. Can the guidance law keep the structure cooler while still reaching the same runway?</p>
+ <h4>Method</h4><ul><li>3-degree-of-freedom entry dynamics over a rotating Earth, verified against an independent inertial integration (0.07 m over 9017 km); 1976 Standard Atmosphere; NASA orbiter aerodynamics, where checking caught a swapped-column error in the source table</li><li>Full mission heating through descent, approach and a 3-hour soak; LI-900, felt pad and aluminium tile-stack conduction at observed orders 2.0 and 0.99, tile sized at 22.8 mm</li><li>Predictor-corrector guidance checked against NASA's reference trajectory, 1262 s against 1254 s and 1.28 g against 1.33 g</li><li>A guidance law built on the heat-load-optimal drag profile, with an onboard thermal model and a conformal margin</li></ul>
+ <h4>Results</h4><ul><li>The range fixes how long the vehicle flies at its load-factor limit; the law picks the lowest load factor that keeps the structure inside the limit</li><li>The structure can start 8 K warmer with a 2 g limit, or 12 K warmer with 2.5 g, and stay below 449.8 K</li><li>Over 1000 flights with model uncertainty, the share exceeding the limit fell from 5.8 to 3.4 per cent at 2 g and to 2.5 per cent at 2.5 g</li><li>A two-term heat-load formula came within 1.3 K of the full model, so no neural network was needed; the conformal margin held 0.952 coverage under feedback</li><li>Reported honestly: laminar heating only, one 1-D tile location, and a Shuttle-class model built from public data rather than the real orbiter</li></ul>
+ <h4>Figures</h4>`,
+ figs:[['figures/reentry/tile-stack.png','Tile stack: LI-900 tile, felt pad and aluminium structure with the 449.8 K limit'],
+       ['figures/reentry/scramjet-wall.png','The companion problem from Paper 1: a fuel-cooled 1 mm Inconel 718 scramjet wall']],
+ links:[['Ask for the manuscript','mailto:hassaanshahid97@gmail.com']]},
 
 {id:'uav-gas-turbine-code',cat:'sciml',title:'Micro gas turbine design and performance code',
  when:'Sep 2024 to Jul 2025 · B.Sc. degree project',img:'figures/gas-turbine/01_uav-microjet-gte-integration.png',

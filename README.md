@@ -21,10 +21,11 @@ design, and UAV systems and flight test. Single-page, hand written, no framework
 
 | Section | Content |
 |---|---|
-| How wrong is a fast surrogate allowed to be? | The physics-informed surrogate preprint and its headline results |
+| When can a model be trusted to make the decision? | Two sole-authored papers: calibrated surrogates for a scramjet coolant scheduler (under review, EAAI) and heat-shield-aware entry guidance (in preparation, AIAA JGCD) |
 | At the intersection of simulation and the flight line | Positioning and background |
 | Where I have engineered | Roles at Linköping University, NaqCoDE Technologies, Institute of Space Technology |
-| Selected engineering work | CFD, conceptual design, design automation and flight systems projects |
+| Selected engineering work | Sixteen projects: CFD, conceptual design, design automation, flight systems and research |
+| Master thesis | Four directions, each with what is already done and what would need a ramp-up |
 | From CAD to the flight line | Built and flown aircraft, with photographs |
 | Academic background | M.Sc. and B.Sc. coursework and grades |
 | Competition track record | Design-Build-Fly and AeroDesign results |
